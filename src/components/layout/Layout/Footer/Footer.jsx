@@ -1,11 +1,12 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container';
+import './footer.scss'
 
 const Footer = () => {
   return (
-    <footer>
-      <Container className="bg-light">
-        <div>Made by Pisti</div>
+    <footer className="footer">
+      <Container>
+        <span><a href="https://patakiistvan.netlify.app" target='blank'>Pataki István</a></span>
       </Container>
     </footer>
   )

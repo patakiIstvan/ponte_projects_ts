@@ -1,10 +1,14 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 400;
+@import './assets/styles/variables.scss';
+@import './assets/styles/reset.scss';
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.fixed-button{
+  position: fixed;
+  bottom: 60px;
+  right: 30px;
 }
