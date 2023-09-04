@@ -29,7 +29,10 @@ const initialProjects = [
         role: ["Team leader"]
       }
     ],
-    links: ["facebook.com", "google.com"]
+    links: [
+      {url: "facebook.com", icon: "facebook"},
+      {url: "google.com", icon: "google"}
+    ]
   },
   {
     title: "Pataki István felvétele",
@@ -49,7 +52,10 @@ const initialProjects = [
         role: ["Sr. front-end"]
       }
     ],
-    links: ["facebook.com", "google.com"]
+    links: [
+      {url: "facebook.com", icon: "facebook"},
+      {url: "google.com", icon: "google"}
+    ]
 
   },
   {
@@ -74,7 +80,9 @@ const initialProjects = [
         role: ["UI/UX designer"]
       }
     ],
-    links: ["facebook.com", "google.com"]
-
+    links: [
+      {url: "facebook.com", icon: "facebook"},
+      {url: "google.com", icon: "google"}
+    ]
   }
 ]
