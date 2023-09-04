@@ -16,38 +16,58 @@ function setLocalStorage(data = null){
 
 const initialProjects = [
   {
-    title: "Project1",
-    description: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
+    title: "Beadandó feladat átnézése",
+    description: "Senior front-endes kolléga bevonása a beadandó feladat átnézésére.",
     members: 
     [
       {
-        name: "Pataki István",
-        position: ["programmer, candidate"]
+        name: "Tóth Miska",
+        position: ["Sr. front-end", "team leader"]
+      },
+      {
+        name: "Veperdi Dóra",
+        position: ["Team leader"]
       }
     ],
     links: ["facebook.com", "google.com"]
   },
   {
-    title: "Project1",
-    description: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
+    title: "Pataki István felvétele",
+    description: "Az interjúk után megbizonyosodva a jelölt szakértelméről, Pataki István felvétele a csapatba.",
     members: 
     [
       {
-        name: "Pataki István",
-        position: ["programmer, candidate"]
+        name: "Gál Judit",
+        position: ["HR"]
+      },
+      {
+        name: "Balázs Bertalan",
+        position: ["CEO"]
+      },
+      {
+        name: "Tóth Miska",
+        position: ["Sr. front-end", "Team leader"]
       }
     ],
     links: ["facebook.com", "google.com"]
 
   },
   {
-    title: "Project1",
-    description: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
+    title: "Integráció",
+    description: "Kódbázis bemutatása Pataki Istvánnak, amelynek mélyebb tanulmányozásával hatékonyan tud dolgozni.",
     members: 
     [
       {
         name: "Pataki István",
         position: ["programmer, candidate"]
+      },
+      {
+        name: "Tóth Miska",
+        position: ["Sr. front-end", "team leader"]
+      },
+      {
+        name: "Veperdi Dóra",
+        position: ["Team leader"]
       }
     ],
     links: ["facebook.com", "google.com"]

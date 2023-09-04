@@ -10,16 +10,19 @@ import FormModal from '../../widgets/FormModal/FormModal';
 
 const ProjectContainer = (props) => {
   const [projectData, setProjectData] = useState(null);
-  console.log(projectData);
 
   const getProjectCards = async () => {
-    const projects = await getProjects();
+    let projects = await getProjects();
+    if (props.search) {
+      console.log(props.search)
+      projects = projects.filter(project => project.title.toLowerCase().includes(props.search.toLowerCase()))
+    }
     setProjectData(projects);
   }
 
   useEffect(() => {
     getProjectCards()
-  }, [])
+  }, [props.search])
 
   if (!projectData) {
     return (
