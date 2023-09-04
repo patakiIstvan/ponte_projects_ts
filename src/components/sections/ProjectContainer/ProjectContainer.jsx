@@ -36,7 +36,7 @@ const ProjectContainer = (props) => {
     <section className="projectSection">
       <Container>
 
-        <Row xs={1} md={2} className="g-4">
+        <Row xs={1} md={3} className="g-4">
           {projectData.map((project, idx) => (
             <Col key={idx}>
               <ProjectCard

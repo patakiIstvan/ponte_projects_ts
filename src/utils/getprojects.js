@@ -22,11 +22,11 @@ const initialProjects = [
     [
       {
         name: "Tóth Miska",
-        position: ["Sr. front-end", "team leader"]
+        role: ["Sr. front-end"]
       },
       {
         name: "Veperdi Dóra",
-        position: ["Team leader"]
+        role: ["Team leader"]
       }
     ],
     links: ["facebook.com", "google.com"]
@@ -38,15 +38,15 @@ const initialProjects = [
     [
       {
         name: "Gál Judit",
-        position: ["HR"]
+        role: ["HR"]
       },
       {
         name: "Balázs Bertalan",
-        position: ["CEO"]
+        role: ["CEO"]
       },
       {
         name: "Tóth Miska",
-        position: ["Sr. front-end", "Team leader"]
+        role: ["Sr. front-end"]
       }
     ],
     links: ["facebook.com", "google.com"]
@@ -59,15 +59,19 @@ const initialProjects = [
     [
       {
         name: "Pataki István",
-        position: ["programmer, candidate"]
+        role: ["Front-end"]
       },
       {
         name: "Tóth Miska",
-        position: ["Sr. front-end", "team leader"]
+        role: ["Sr. front-end"]
       },
       {
         name: "Veperdi Dóra",
-        position: ["Team leader"]
+        role: ["Team leader"]
+      },
+      {
+        name: "Kiss Sára",
+        role: ["UI/UX designer"]
       }
     ],
     links: ["facebook.com", "google.com"]
