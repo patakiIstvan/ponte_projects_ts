@@ -30,8 +30,8 @@ const initialProjects = [
       }
     ],
     links: [
-      {url: "facebook.com", icon: "facebook"},
-      {url: "google.com", icon: "google"}
+      {url: "https://github.com/patakiIstvan/ts_projects_dashboard", icon: "github"},
+      {url: "https://patakiistvan.netlify.app/", icon: ""}
     ]
   },
   {
@@ -53,8 +53,8 @@ const initialProjects = [
       }
     ],
     links: [
-      {url: "facebook.com", icon: "facebook"},
-      {url: "google.com", icon: "google"}
+      {url: "https://www.facebook.com/istvan.pataki.39/", icon: "facebook"},
+      {url: "https://patakiistvan.netlify.app/", icon: ""}
     ]
 
   },
@@ -81,8 +81,7 @@ const initialProjects = [
       }
     ],
     links: [
-      {url: "facebook.com", icon: "facebook"},
-      {url: "google.com", icon: "google"}
+      {url: "https://patakiistvan.netlify.app/", icon: ""}
     ]
   }
 ]
