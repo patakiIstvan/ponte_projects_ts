@@ -7,8 +7,10 @@ import ProjectCard from '../../reuseables/ProjectCard/ProjectCard';
 import { getProjects } from '../../../utils/getprojects';
 import Spinner from 'react-bootstrap/Spinner';
 import FormModal from '../../widgets/FormModal/FormModal';
+import InputContainer1, { inputValidate1 } from '../../form/formPages/InputContainer1';
 
 const ProjectContainer = (props) => {
+
   const [projectData, setProjectData] = useState(null);
 
   const getProjectCards = async () => {
@@ -47,7 +49,7 @@ const ProjectContainer = (props) => {
         </Row>
         <FormModal
           getProjectCards={getProjectCards}
-          formData={"sg"}
+          pages={[{ inputs: <InputContainer1 />, "valiadtion": inputValidate1 }, { inputs: <></>, valiadtion: null }, { inputs: <></>, valiadtion: null }]}
         />
       </Container>
     </section>
