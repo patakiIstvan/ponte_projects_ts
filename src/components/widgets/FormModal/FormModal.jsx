@@ -8,18 +8,19 @@ import { useWizardForm } from '../../../utils/hooks/useWizardForm';
 
 function FormModal() {
   const [show, setShow] = useState(false);
-  const Wizard = useWizardForm(["1", "2", "3"])
-  const [formData, setFormData] = useState({})
+  const Wizard = useWizardForm([{ inputs: <></>, valiadtion: null }, { inputs: <></>, valiadtion: null }, { inputs: <></>, valiadtion: null }])
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  function onSubmit(e) {
+  const onSubmit = function (e) {
     e.preventDefault();
-  }
-
-  const HandleChange = function (e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    if (Wizard.currentPage < Wizard.numberOfPages - 1) {
+      Wizard.toNextPage()
+    } else {
+      console.log("submited answer")
+    }
   }
 
   return (
@@ -32,8 +33,8 @@ function FormModal() {
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit}>
+          <Modal.Body>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -41,7 +42,10 @@ function FormModal() {
                 placeholder="name@example.com"
                 name="email"
                 autoFocus
-                onChange={HandleChange}
+                required
+                onChange={Wizard.handleTextChange}
+                page="0"
+                error=""
               />
             </Form.Group>
             <Form.Group
@@ -51,17 +55,18 @@ function FormModal() {
               <Form.Label>Example textarea</Form.Label>
               <Form.Control as="textarea" rows={3} />
             </Form.Group>
-          </Form>
-          <ProgressBar animated now={(Wizard.currentPage + 1) * (100 / Wizard.numberOfPages)} />
-        </Modal.Body>
-        <Modal.Footer className="space-between">
-          {Wizard.currentPage > 0 ? <Button onClick={Wizard.toPrevPage} variant="secondary">
-            Vissza
-          </Button> : null}
-          <Button type={onSubmit} className="right-side" onClick={Wizard.toNextPage} variant="primary">
-            {Wizard.currentPage >= Wizard.numberOfPages - 1 ? "Befejezés" : "Tovább"}
-          </Button>
-        </Modal.Footer>
+
+            <ProgressBar animated now={(Wizard.currentPage + 1) * (100 / Wizard.numberOfPages)} />
+          </Modal.Body>
+          <Modal.Footer className="space-between">
+            {Wizard.currentPage > 0 ? <Button onClick={Wizard.toPrevPage} variant="secondary">
+              Vissza
+            </Button> : null}
+            <Button type="submit" className="right-side" variant="primary">
+              {Wizard.currentPage >= Wizard.numberOfPages - 1 ? "Befejezés" : "Tovább"}
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );

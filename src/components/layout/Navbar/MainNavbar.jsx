@@ -8,7 +8,7 @@ const MainNavbar = forwardRef(function MainNavbar(props, ref) {
   return (
     <Navbar data-bs-theme="dark" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand>Ponte Projektek</Navbar.Brand>
+        <Navbar.Brand>Type-safe projektek</Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <Form className="d-flex">
             <Form.Control
