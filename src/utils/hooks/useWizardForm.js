@@ -21,6 +21,8 @@ export function useWizardForm(pages) {
         updatedFormData[action.payload.name].error = errorMessage
         }
         return updatedFormData;
+        case "ON_CLEAR":
+          return action.payload;
       default:
         return state
     }
@@ -41,16 +43,12 @@ export function useWizardForm(pages) {
     setFormData({type:"ON_CHANGE", payload: e.target})
   }
 
-  // Could make an abstraction
-  function getIcon(url){
-      if( url.includes("facebook.com")){ return "facebook"}
-      else if (url.includes("github.com")){ return "github"}
-      else if (url.includes("google.com")){ return "google"}
-    return "";
+  function handleLinkChange(e){
+    setFormData({type:"ON_CHANGE", payload: e.target, extraData: {value:{...formData[e.target.name]?.value,[e.target.getAttribute("inputid")]: e.target.value}}})
   }
 
-  function handleLinkChange(e){
-    setFormData({type:"ON_CHANGE", payload: e.target, extraData: {value:{...formData[e.target.name]?.value,[e.target.getAttribute("inputid")]: {icon: getIcon(e.target.value), url: e.target.value}}}})
+  const clearFormData = function(){
+    setFormData({type:"ON_CLEAR", payload:{} })
   }
 
   function toPrevPage() {
@@ -63,12 +61,14 @@ export function useWizardForm(pages) {
 
   return {
     currentPage,
+    setCurrentPage,
     toNextPage,
     toPrevPage,
     numberOfPages: pages.length,
     currentInputs,
     handleTextChange,
     handleLinkChange,
-    formData
+    formData,
+    clearFormData
   }
 }

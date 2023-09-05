@@ -6,9 +6,9 @@ import Button from 'react-bootstrap/Button';
 
 const MainNavbar = forwardRef(function MainNavbar(props, ref) {
 
-  useEffect(() => {
-    alert("Sajnos nem sikerült hétfőre befejezni a beadandó projektetm azonban az >>absztrakt<< wizard form kész van és van benne validáció. A hét folyamán igyekszem befejezni a projektet.")
-  }, [])
+  // useEffect(() => {
+  //   alert("Sajnos nem sikerült hétfőre befejezni a beadandó projektetm azonban az >>absztrakt<< wizard form kész van és van benne validáció. A hét folyamán igyekszem befejezni a projektet.")
+  // }, [])
 
   return (
     <Navbar data-bs-theme="dark" className="bg-body-tertiary">

@@ -52,7 +52,8 @@ function FormModal(props) {
     } else {
       const data = getProjectData(Wizard.formData)
       props.onModalSubmit(data)
-      
+      Wizard.clearFormData();
+      Wizard.setCurrentPage(0);
       handleClose();
     }
   }

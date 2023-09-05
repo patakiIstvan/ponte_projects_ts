@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react'
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import LinkIcon from '../../reuseables/LinkIcon/LinkIcon';
 
 
 const LinkInput = (props) => {
@@ -19,38 +18,39 @@ const LinkInput = (props) => {
 
   return (
     <>
-      <InputGroup>
-        <InputGroup.Text>@</InputGroup.Text>
-        <Form.Control
-          type="text"
-          name="links"
-          inputid={inputId}
-          placeholder="Input group example"
-          aria-label="Input group example"
-          onChange={props.handleLinkChange}
-          ref={inputRef}
-        />
-        <Button onClick={() => { newLink(inputRef) }} variant="outline-secondary">Link beküldése</Button>
+      <div className="linkInput-container">
+        <InputGroup className="main-linkInput">
+          <InputGroup.Text>@</InputGroup.Text>
+          <Form.Control
+            type="text"
+            name="links"
+            inputid={inputId}
+            placeholder="Projekthez kapcsolódó weboldal"
+            onChange={props.handleLinkChange}
+            ref={inputRef}
+          />
+          <Button onClick={() => { newLink(inputRef) }} variant="outline-secondary">Link beküldése</Button>
 
-      </InputGroup>
-      {props.formData?.links?.value && Object.entries(props.formData?.links?.value).map(([linkId, link]) => (
-        (<>
-          <InputGroup key={"link_" + linkId}>
-            <InputGroup.Text><LinkIcon icon={link.icon} url={link.url} /></InputGroup.Text>
-            <Form.Control
-              type="text"
-              disabled
-              name="links"
-              inputid={linkId}
-              placeholder="Input group example"
-              aria-label="Input group example"
-              value={link.url}
-              autoFocus
-            />
-          </InputGroup>
-        </>)
-      ))
-      }
+        </InputGroup>
+        {props.formData?.links?.value && Object.entries(props.formData?.links?.value).map(([linkId, link]) => (
+          (<>
+            <InputGroup key={"link_" + link}>
+              <InputGroup.Text>
+                <img className="link-icon" src={`https://www.google.com/s2/favicons?domain=${link}&sz=256`} />
+              </InputGroup.Text>
+              <Form.Control
+                type="text"
+                disabled
+                name="links"
+                inputid={linkId}
+                value={link}
+                autoFocus
+              />
+            </InputGroup>
+          </>)
+        ))
+        }
+      </div>
     </>
   )
 }

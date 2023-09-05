@@ -2,7 +2,6 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import './projectCard.scss';
-import LinkIcon from '../LinkIcon/LinkIcon';
 
 const ProjectCard = (props) => {
 
@@ -25,10 +24,10 @@ const ProjectCard = (props) => {
       </ListGroup>
       <Card.Body>
         <div className="link-container">
-        {props.links.map((link, idx) => (
-          <LinkIcon icon={link.icon} url={link.url} key={"link_" + idx} />
-        ))
-        }
+          {props?.links && props.links.map((link, idx) => (
+            <a href={link} target="_blank" key={"icon_" + idx}><img className="link-icon" src={`https://www.google.com/s2/favicons?domain=${link}&sz=256`} /></a>
+          ))
+          }
         </div>
       </Card.Body>
     </Card>

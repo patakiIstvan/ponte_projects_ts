@@ -29,10 +29,7 @@ const initialProjects = [
         role: ["Team leader"]
       }
     ],
-    links: [
-      {url: "https://github.com/patakiIstvan/ts_projects_dashboard", icon: "github"},
-      {url: "https://patakiistvan.netlify.app/", icon: ""}
-    ]
+    links: ["https://github.com/patakiIstvan/ts_projects_dashboard", "https://patakiistvan.netlify.app/"]
   },
   {
     title: "Pataki István felvétele",
@@ -52,11 +49,7 @@ const initialProjects = [
         role: ["Sr. front-end"]
       }
     ],
-    links: [
-      {url: "https://www.facebook.com/istvan.pataki.39/", icon: "facebook"},
-      {url: "https://patakiistvan.netlify.app/", icon: ""}
-    ]
-
+    links: ["https://www.facebook.com/istvan.pataki.39/", "https://patakiistvan.netlify.app/"]
   },
   {
     title: "Integráció",
@@ -80,8 +73,6 @@ const initialProjects = [
         role: ["UI/UX designer"]
       }
     ],
-    links: [
-      {url: "https://patakiistvan.netlify.app/", icon: ""}
-    ]
+    links: ["https://patakiistvan.netlify.app/"]
   }
 ]
