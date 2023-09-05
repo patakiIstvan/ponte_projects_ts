@@ -8,6 +8,8 @@ import { getProjects } from '../../../utils/getprojects';
 import Spinner from 'react-bootstrap/Spinner';
 import FormModal from '../../widgets/FormModal/FormModal';
 import InputContainer1, { inputValidate1 } from '../../form/formPages/InputContainer1';
+import InputContainer2 from '../../form/formPages/InputContainer2';
+
 
 const ProjectContainer = (props) => {
 
@@ -25,6 +27,14 @@ const ProjectContainer = (props) => {
   useEffect(() => {
     getProjectCards()
   }, [props.search])
+
+  const onModalSubmit = function (data) {
+    let projects = localStorage.getItem("projects");
+    projects = JSON.parse(projects);
+    projects.push(data)
+    localStorage.setItem("projects", JSON.stringify(projects));
+    getProjectCards();
+  }
 
   if (!projectData) {
     return (
@@ -48,8 +58,11 @@ const ProjectContainer = (props) => {
           ))}
         </Row>
         <FormModal
-          getProjectCards={getProjectCards}
-          pages={[{ inputs: <InputContainer1 />, "valiadtion": inputValidate1 }, { inputs: <></>, valiadtion: null }, { inputs: <></>, valiadtion: null }]}
+          onModalSubmit={onModalSubmit}
+          pages={[
+            { inputs: <InputContainer1 />, "valiadtion": inputValidate1, title: "Projekt leírások" },
+            { inputs: <InputContainer2 />, title: "Projekt linkek" },
+            { inputs: <></> }]}
         />
       </Container>
     </section>

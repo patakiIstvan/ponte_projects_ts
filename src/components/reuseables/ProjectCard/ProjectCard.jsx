@@ -18,7 +18,8 @@ const ProjectCard = (props) => {
         <Card.Text>{props.description}</Card.Text>
       </Card.Body>
       <ListGroup variant="flush">
-        {props.members.map((member, idx) => (
+
+        {props.members && props.members.map((member, idx) => (
           <ListGroup.Item key={"member_" + idx}>{member.name} - {member.role.join(', ')}</ListGroup.Item>
         ))}
       </ListGroup>

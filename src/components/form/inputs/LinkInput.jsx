@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import LinkIcon from '../../reuseables/LinkIcon/LinkIcon';
 
+
 const LinkInput = (props) => {
   const [inputId, setInputId] = useState(0);
 
@@ -30,6 +31,7 @@ const LinkInput = (props) => {
           ref={inputRef}
         />
         <Button onClick={() => { newLink(inputRef) }} variant="outline-secondary">Link beküldése</Button>
+
       </InputGroup>
       {props.formData?.links?.value && Object.entries(props.formData?.links?.value).map(([linkId, link]) => (
         (<>
@@ -43,6 +45,7 @@ const LinkInput = (props) => {
               placeholder="Input group example"
               aria-label="Input group example"
               value={link.url}
+              autoFocus
             />
           </InputGroup>
         </>)

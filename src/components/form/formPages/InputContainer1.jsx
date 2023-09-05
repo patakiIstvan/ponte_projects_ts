@@ -5,9 +5,8 @@ import LinkInput from '../inputs/LinkInput';
 const InputContainer1 = (props) => {
   return (
     <>
-      <LinkInput formData={props.formData} handleLinkChange={props.handleLinkChange} />
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Label>Email address</Form.Label>
+        <Form.Label>Cím</Form.Label>
         <Form.Control
           type="text"
           placeholder="name@example.com"
@@ -23,7 +22,7 @@ const InputContainer1 = (props) => {
         className="mb-3"
         controlId="exampleForm.ControlTextarea1"
       >
-        <Form.Label>Example textarea</Form.Label>
+        <Form.Label>Leírás</Form.Label>
         <Form.Control as="textarea" rows={3}
           name="description"
           page="0"

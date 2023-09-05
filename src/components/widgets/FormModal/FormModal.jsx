@@ -10,6 +10,7 @@ function FormModal(props) {
 
   const [show, setShow] = useState(false);
   const Wizard = useWizardForm(props.pages)
+  console.log(Wizard.formData)
 
 
   const handleClose = () => setShow(false);
@@ -25,12 +26,34 @@ function FormModal(props) {
     });
   };
 
+  const getProjectData = function (data) {
+    const simplifiedData = {};
+    console.log(data)
+    Object.entries(data).forEach(([inputName, inputValue]) => {
+      if ("value" in inputValue) {
+        if (typeof inputValue.value === "object") {
+          const list = [];
+          Object.values(inputValue.value).forEach(v => {
+            list.push(v);
+          })
+          simplifiedData[inputName] = list;
+        } else {
+          simplifiedData[inputName] = inputValue.value;
+        }
+      }
+    })
+    return simplifiedData;
+  }
+
   const onSubmit = function (e) {
     e.preventDefault();
     if (Wizard.currentPage < Wizard.numberOfPages - 1) {
       Wizard.toNextPage()
     } else {
-      console.log("submited answer")
+      const data = getProjectData(Wizard.formData)
+      props.onModalSubmit(data)
+      
+      handleClose();
     }
   }
 
