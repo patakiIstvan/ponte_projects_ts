@@ -3,7 +3,10 @@ import React, { useReducer, useState } from "react";
 export function useWizardForm(pages) {
 
   const [currentPage, setCurrentPage] = useState(0);
+  const [hasErrors, setHasErrors] = useState(false);
   const currentInputs = pages[currentPage]
+
+  console.log(hasErrors)
 
   const initialReducer = function(state, action){
     switch(action.type){
@@ -17,9 +20,12 @@ export function useWizardForm(pages) {
           }
         };
         if ("validation" in currentInputs){
-        const errorMessage = currentInputs.valiadtion(action.payload?.name,action.payload?.value)
-        updatedFormData[action.payload.name].error = errorMessage
-        }
+          try{
+        updatedFormData[action.payload.name].error = currentInputs.validation(action.payload?.name,action.payload?.value)
+          } catch(e){
+            console.log(e)
+          }  
+      }
         return updatedFormData;
         case "ON_CLEAR":
           return action.payload;
@@ -29,15 +35,6 @@ export function useWizardForm(pages) {
   }
 
   const [formData, setFormData] = useReducer( initialReducer,{})
-
-  console.log(formData);
-
-  function toNextPage() {
-    setCurrentPage(i => {
-      if (i >= pages.length - 1) return i
-      return i + 1
-    })
-  }
 
   function handleTextChange(e){
     setFormData({type:"ON_CHANGE", payload: e.target})
@@ -49,6 +46,25 @@ export function useWizardForm(pages) {
 
   const clearFormData = function(){
     setFormData({type:"ON_CLEAR", payload:{} })
+  }
+
+const checkErros = function(){
+  setHasErrors(false)
+  Object.values(formData).forEach(inputData =>{
+    console.log(inputData.page)
+    console.log(currentPage)
+    if (inputData.page == currentPage){
+      if (inputData?.error !== ""){ setHasErrors(true); return true;}
+    }
+  })
+  return hasErrors;
+}
+
+  function toNextPage() {
+    !checkErros() && setCurrentPage(i => {
+      if (i >= pages.length - 1) return i
+      return i + 1
+    })
   }
 
   function toPrevPage() {
@@ -69,6 +85,7 @@ export function useWizardForm(pages) {
     handleTextChange,
     handleLinkChange,
     formData,
-    clearFormData
+    clearFormData,
+    hasErrors
   }
 }

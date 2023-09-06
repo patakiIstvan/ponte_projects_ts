@@ -1,49 +1,42 @@
 import Form from 'react-bootstrap/Form';
 import React from 'react'
-import LinkInput from '../inputs/LinkInput';
+import TextInput from '../../reuseables/inputFields/TextInput';
+
 
 const InputContainer1 = (props) => {
   return (
     <>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Label>Cím</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="name@example.com"
-          name="title"
-          required
-          autoFocus
-          onChange={props.handleTextChange}
-          page="0"
-          error=""
-        />
-      </Form.Group>
-      <Form.Group
-        className="mb-3"
-        controlId="exampleForm.ControlTextarea1"
-      >
-        <Form.Label>Leírás</Form.Label>
-        <Form.Control as="textarea" rows={3}
-          name="description"
-          page="0"
-          error=""
-          onChange={props.handleTextChange}
-        />
-      </Form.Group>
-
+      <TextInput
+        {...props}
+        name="title"
+        label="Cím"
+        page={0}
+        data={props.formData}
+        max={255}
+        required = {true}
+      />
+      <TextInput
+        {...props}
+        name="description"
+        type="textarea"
+        label="Leírás"
+        page={0}
+        data={props.formData}
+        max={500}
+      />
     </>
   )
 }
 export default InputContainer1;
 
-export let inputValidate1 = function (inputName, inputValue) {
+export const inputValidate1 = function (inputName, inputValue) {
   if (inputName == "title") {
     if (inputValue.length > 255) {
       return "A cím túl hosszú"
     }
   } else if (inputName == "description") {
     if (inputValue.length > 0 && inputValue.length < 50 || inputValue.length > 500) {
-      return "Ha van leírás, maximum 500 karakter hosszú lehet, és a minimum hossza 50"
+      return "A leírás legyen minimum 50 karakter"
     }
   }
   return "";

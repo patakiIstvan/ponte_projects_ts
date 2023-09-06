@@ -46,6 +46,7 @@ const ProjectContainer = (props) => {
 
   return (
     <section className="projectSection">
+      <div className="msg">Sajnos nem sikerült teljesen befejeznem a beadandót, még hátra van egy input mező megírása, illetve a változók typeosítása. Ezeket tervezem a közeljövőben megírni, mindenesetre remélem elég reprezentatív képet ad a tudásomról az eddig megírt kód.</div>
       <Container>
 
         <Row xs={1} md={3} className="g-4">
@@ -60,7 +61,7 @@ const ProjectContainer = (props) => {
         <FormModal
           onModalSubmit={onModalSubmit}
           pages={[
-            { inputs: <InputContainer1 />, "valiadtion": inputValidate1, title: "Projekt leírások" },
+            { inputs: <InputContainer1 />, "validation": inputValidate1, title: "Projekt leírások" },
             { inputs: <InputContainer2 />, title: "Projekt linkek" },
             { inputs: <></> }]}
         />

@@ -22,6 +22,7 @@ function FormModal(props) {
         handleTextChange: Wizard.handleTextChange,
         handleLinkChange: Wizard.handleLinkChange,
         formData: Wizard.formData,
+        error: Wizard.hasErrors
       });
     });
   };
