@@ -51,16 +51,16 @@ export function useWizardForm(pages) {
     let haserrors = false
     Object.values(formData).forEach(inputData =>{
       if (inputData.page == currentPage){
-        if (inputData?.error !== ""){ console.log("I'm here"); setHasErrors(true); haserrors = true;}
+        if (inputData?.error !== ""){ 
+          setHasErrors(true);
+          haserrors = true;}
       }
     })
     return haserrors;
   }
 
   const toNextPage = function() {
-    const haserrors = checkErros();
-    console.log(haserrors)
-    !haserrors && setCurrentPage(i => {
+    !checkErros() && setCurrentPage(i => {
       if (i >= pages.length - 1) return i
       return i + 1
     })
