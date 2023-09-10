@@ -15,7 +15,7 @@ const TextInput = (props) => {
   extraProps = { ...extraProps, ...inputType }
 
   if (props?.max) {
-    extraProps["maxlength"] = props?.max;
+    extraProps["maxLength"] = props?.max;
   }
   if (props?.required) {
     extraProps["required"] = "required";
@@ -35,7 +35,7 @@ const TextInput = (props) => {
         />
       </Form.Group >
       <div className="extra-input-fields">
-        {props?.data && props?.data[props.name]?.error && "error" in props && <span className="input-additional-text red">
+        {props?.data && props?.data[props.name]?.error && props.error && <span className="input-additional-text red">
           {props?.data[props.name].error}
         </span>}
         {props?.data && props?.max && <span className="right-side input-additional-text">Karakterek: {[props?.name] in props.data ? props?.data[props.name].value.length : 0}/{props.max}</span>}

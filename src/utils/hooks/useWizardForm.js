@@ -6,8 +6,6 @@ export function useWizardForm(pages) {
   const [hasErrors, setHasErrors] = useState(false);
   const currentInputs = pages[currentPage]
 
-  console.log(hasErrors)
-
   const initialReducer = function(state, action){
     switch(action.type){
       case "ON_CHANGE":
@@ -48,26 +46,27 @@ export function useWizardForm(pages) {
     setFormData({type:"ON_CLEAR", payload:{} })
   }
 
-const checkErros = function(){
-  setHasErrors(false)
-  Object.values(formData).forEach(inputData =>{
-    console.log(inputData.page)
-    console.log(currentPage)
-    if (inputData.page == currentPage){
-      if (inputData?.error !== ""){ setHasErrors(true); return true;}
-    }
-  })
-  return hasErrors;
-}
+  const checkErros = function(){
+    setHasErrors(false)
+    let haserrors = false
+    Object.values(formData).forEach(inputData =>{
+      if (inputData.page == currentPage){
+        if (inputData?.error !== ""){ console.log("I'm here"); setHasErrors(true); haserrors = true;}
+      }
+    })
+    return haserrors;
+  }
 
-  function toNextPage() {
-    !checkErros() && setCurrentPage(i => {
+  const toNextPage = function() {
+    const haserrors = checkErros();
+    console.log(haserrors)
+    !haserrors && setCurrentPage(i => {
       if (i >= pages.length - 1) return i
       return i + 1
     })
   }
 
-  function toPrevPage() {
+  const toPrevPage = function() {
     setCurrentPage(i => {
       if (i <= 0) return i
       return i - 1

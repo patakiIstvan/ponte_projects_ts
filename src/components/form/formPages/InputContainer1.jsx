@@ -13,7 +13,7 @@ const InputContainer1 = (props) => {
         page={0}
         data={props.formData}
         max={255}
-        required = {true}
+        required={true}
       />
       <TextInput
         {...props}
@@ -36,7 +36,7 @@ export const inputValidate1 = function (inputName, inputValue) {
     }
   } else if (inputName == "description") {
     if (inputValue.length > 0 && inputValue.length < 50 || inputValue.length > 500) {
-      return "A leírás legyen minimum 50 karakter"
+      return "Ha van leírás, legyen minimum 50 karakter"
     }
   }
   return "";
