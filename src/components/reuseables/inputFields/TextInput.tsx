@@ -2,14 +2,31 @@ import React from 'react'
 import Form from 'react-bootstrap/Form';
 import './textInput.scss'
 
+interface TextInputProps {
+  type?: string;
+  max?: number;
+  required?: boolean;
+  name?: string;
+  label?: string;
+  placeholder?: string;
+  handleTextChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  page?: number;
+  data?: Record<string, any>;
+  error?: boolean;
+}
 
-const TextInput = (props) => {
+type typeOfInputType = {
+  type?: string;
+  as?: string;
+  rows?: number;
+}
 
+const TextInput: React.FC<TextInputProps> = (props) => {
 
-  let extraProps = {}
+  let extraProps: Record<string, any> = {}
 
-  let inputType = { type: "text" }
-  if (props.type == "textarea") {
+  let inputType: typeOfInputType = { type: "text" }
+  if (props.type === "textarea") {
     inputType = { "as": "textarea", "rows": 3 }
   }
   extraProps = { ...extraProps, ...inputType }
@@ -36,10 +53,10 @@ const TextInput = (props) => {
         </Form.Control>
       </Form.Group >
       <div className="extra-input-fields">
-        {props?.data && props?.data[props.name]?.error && props.error && <span className="input-additional-text red">
-          {props?.data[props.name].error}
+        {props?.data && props?.data[props.name!]?.error && props.error && <span className="input-additional-text red">
+          {props?.data[props.name!]?.error}
         </span>}
-        {props?.data && props?.max && <span className="right-side input-additional-text">Karakterek: {[props?.name] in props.data ? props?.data[props.name].value.length : 0}/{props.max}</span>}
+        {props?.data && props?.max && <span className="right-side input-additional-text">Karakterek: {props.data[props.name!] ? props?.data[props.name!].value.length : 0}/{props.max}</span>}
       </div>
     </>
   )

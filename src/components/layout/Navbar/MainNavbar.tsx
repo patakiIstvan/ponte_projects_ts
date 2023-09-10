@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 interface MainNavbarProps {
-  handleClick: ( ref: React.ForwardedRef<HTMLInputElement>) => void;
+  handleClick: (ref: React.ForwardedRef<HTMLInputElement>) => void;
 }
 
 
