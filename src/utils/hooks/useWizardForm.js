@@ -13,7 +13,7 @@ export function useWizardForm(pages) {
           ...state,
           [action.payload.name]:{
           value: action?.extraData?.value ? action?.extraData?.value : action.payload?.value,
-          page: action.payload?.page ?? 0,
+          page: action.payload?.getAttribute("page") ?? 0,
            error: action.payload?.error ?? ""
           }
         };
@@ -42,6 +42,18 @@ export function useWizardForm(pages) {
     setFormData({type:"ON_CHANGE", payload: e.target, extraData: {value:{...formData[e.target.name]?.value,[e.target.getAttribute("inputid")]: e.target.value}}})
   }
 
+  function handleMemberChange(e){
+    if (e.target.value != ""){
+    setFormData({
+      type:"ON_CHANGE",
+       payload: e.target,
+      extraData: {value:{...formData[e.target.name]?.value,
+        [e.target.getAttribute("inputid")]: {name: e.target.value, role: e.target.getAttribute("role") != "" ? [e.target.getAttribute("role")] : []}
+      }}
+    })
+    }
+  }
+
   const clearFormData = function(){
     setFormData({type:"ON_CLEAR", payload:{} })
   }
@@ -50,6 +62,9 @@ export function useWizardForm(pages) {
     setHasErrors(false)
     let haserrors = false
     Object.values(formData).forEach(inputData =>{
+      console.log(inputData.value)
+      console.log(inputData.page)
+      console.log(currentPage)
       if (inputData.page == currentPage){
         if (inputData?.error !== ""){ 
           setHasErrors(true);
@@ -85,6 +100,7 @@ export function useWizardForm(pages) {
     handleLinkChange,
     formData,
     clearFormData,
-    hasErrors
+    hasErrors,
+    handleMemberChange
   }
 }

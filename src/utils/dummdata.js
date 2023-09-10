@@ -1,0 +1,1 @@
+export const dummy_roles = ["Project manager", "Sr. front-end", "Front-end", "Sr. Back-end" ,"Back-end", "Team leader", "HR", "CEO", "Scrum master", "Marketing"]

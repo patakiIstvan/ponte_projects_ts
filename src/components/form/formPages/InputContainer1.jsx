@@ -3,13 +3,13 @@ import TextInput from '../../reuseables/inputFields/TextInput';
 
 
 const InputContainer1 = (props) => {
+  console.log(props)
   return (
     <>
       <TextInput
         {...props}
         name="title"
         label="Cím"
-        page={0}
         data={props.formData}
         max={255}
         required={true}
@@ -19,7 +19,6 @@ const InputContainer1 = (props) => {
         name="description"
         type="textarea"
         label="Leírás"
-        page={0}
         data={props.formData}
         max={500}
       />

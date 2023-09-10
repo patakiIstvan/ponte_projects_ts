@@ -9,6 +9,8 @@ import Spinner from 'react-bootstrap/Spinner';
 import FormModal from '../../widgets/FormModal/FormModal';
 import InputContainer1, { inputValidate1 } from '../../form/formPages/InputContainer1';
 import InputContainer2 from '../../form/formPages/InputContainer2';
+import InputContainer3 from '../../form/formPages/InputContainer3';
+
 
 
 const ProjectContainer = (props) => {
@@ -46,7 +48,7 @@ const ProjectContainer = (props) => {
 
   return (
     <section className="projectSection">
-      <div className="msg">Sajnos nem sikerült teljesen befejeznem a beadandót, még hátra van egy input mező megírása, illetve a változók typeosítása. Ezeket tervezem a közeljövőben megírni, mindenesetre remélem elég reprezentatív képet ad a tudásomról az eddig megírt kód.</div>
+      <div className="msg">Sajnos nem sikerült teljesen befejeznem a beadandót, még hátra van a változók typeosítása.</div>
       <Container>
 
         <Row xs={1} md={3} className="g-4">
@@ -62,8 +64,10 @@ const ProjectContainer = (props) => {
           onModalSubmit={onModalSubmit}
           pages={[
             { inputs: <InputContainer1 />, "validation": inputValidate1, title: "Projekt leírások" },
-            { inputs: <InputContainer2 />, title: "Projekt linkek" },
-            { inputs: <></> }]}
+            { inputs: <InputContainer3 />, title: "Résztvevők hozzáadása" },
+            { inputs: <InputContainer2 />, title: "Projekt linkek" }
+
+          ]}
         />
       </Container>
     </section>

@@ -32,7 +32,8 @@ const TextInput = (props) => {
           autoFocus
           onChange={props?.handleTextChange}
           page={props.page ?? 0}
-        />
+        >
+        </Form.Control>
       </Form.Group >
       <div className="extra-input-fields">
         {props?.data && props?.data[props.name]?.error && props.error && <span className="input-additional-text red">

@@ -1,5 +1,4 @@
-import React from 'react'
-import Layout from '../../components/layout/Layout/Container/Layout'
+import Layout from '../../components/layout/Layout/Container/Layout.tsx'
 import ProjectContainer from '../../components/sections/ProjectContainer/ProjectContainer'
 
 const HomePage = () => {

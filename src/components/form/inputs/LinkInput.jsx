@@ -13,6 +13,7 @@ const LinkInput = (props) => {
     if (inputRef.current.value.length > 0) {
       setInputId(prevId => prevId + 1);
       inputRef.current.value = ""
+      inputRef.current.focus();
     }
   }
 
@@ -27,7 +28,9 @@ const LinkInput = (props) => {
             inputid={inputId}
             placeholder="Projekthez kapcsolódó weboldal"
             onChange={props.handleLinkChange}
+            onFocus={props.handleLinkChange}
             ref={inputRef}
+            page={props.page ?? 0}
           />
           <Button onClick={() => { newLink(inputRef) }} variant="outline-secondary">Link beküldése</Button>
 
@@ -44,7 +47,6 @@ const LinkInput = (props) => {
                 name="links"
                 inputid={linkId}
                 value={link}
-                autoFocus
               />
             </InputGroup>
           </>)
