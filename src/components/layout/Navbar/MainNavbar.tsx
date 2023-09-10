@@ -1,11 +1,15 @@
-import { forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const MainNavbar = forwardRef(function MainNavbar(props, ref) {
+interface MainNavbarProps {
+  handleClick: ( ref: React.ForwardedRef<HTMLInputElement>) => void;
+}
 
+
+const MainNavbar = forwardRef<HTMLInputElement, MainNavbarProps>(function MainNavbar(props, ref) {
   return (
     <Navbar data-bs-theme="dark" className="bg-body-tertiary">
       <Container>
@@ -19,7 +23,7 @@ const MainNavbar = forwardRef(function MainNavbar(props, ref) {
               className="me-2"
               aria-label="Search"
             />
-            <Button onClick={(e) => { props.handleClick(e, ref) }} variant="outline-primary">Keresés</Button>
+            <Button onClick={() => props.handleClick(ref)} variant="outline-primary">Keresés</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

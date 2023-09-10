@@ -1,20 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import MainNavbar from '../../Navbar/MainNavbar'
 import Footer from '../Footer/Footer'
 import './layout.scss'
 
-const Layout = (props) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
 
-  const [search, setSearch] = useState("");
-  const ref = useRef(null);
+  const [search, setSearch] = useState<string>("");
+  const ref = useRef<HTMLInputElement>(null);
 
-  const handleClick = function (e, ref) {
-    setSearch(ref.current.value)
+  const handleClick = function () {
+    if (ref.current) {
+      setSearch(ref.current.value)
+    }
   }
 
   const renderChildren = () => {
-    return React.Children.map(props.children, (child) => {
-      return React.cloneElement(child, {
+    return React.Children.map(children, (child) => {
+      return React.cloneElement(child as React.ReactElement, {
         search,
       });
     });
