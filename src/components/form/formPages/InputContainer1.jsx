@@ -3,7 +3,6 @@ import TextInput from '../../reuseables/inputFields/TextInput';
 
 
 const InputContainer1 = (props) => {
-  console.log(props)
   return (
     <>
       <TextInput

@@ -48,7 +48,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
           name={props.name ?? "textInput"}
           autoFocus
           onChange={props?.handleTextChange}
-          page={props.page ?? 0}
+          data-page={props.page ?? 0}
         >
         </Form.Control>
       </Form.Group >

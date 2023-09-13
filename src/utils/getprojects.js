@@ -1,4 +1,5 @@
 export const getProjects = async function(){
+  debugger;
   let projects = localStorage.getItem("projects");
   if (!projects){
     setLocalStorage()

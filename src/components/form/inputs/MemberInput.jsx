@@ -60,7 +60,7 @@ const MemberInput = (props) => {
             align="end"
           >
             {dummy_roles.map(role => (
-              <Dropdown.Item onClick={handleRole} value={role} href="#">{role}</Dropdown.Item>
+              <Dropdown.Item key={role} onClick={handleRole} value={role} href="#">{role}</Dropdown.Item>
             ))}
           </DropdownButton>
           <Button onClick={() => { newMember(inputRef) }} variant="outline-secondary">Hozzáadás</Button>
@@ -75,7 +75,7 @@ const MemberInput = (props) => {
                 name="members"
                 inputid={memberId}
                 value={`${member.name ? member.name : ''}${member.role.length > 0 ? " - " + member.role[0] : ""}`}
-                page={props.page ?? 0}
+                data-page={props.page ?? 0}
               />
             </InputGroup>
           </>)

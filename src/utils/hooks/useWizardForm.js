@@ -13,7 +13,7 @@ export function useWizardForm(pages) {
           ...state,
           [action.payload.name]:{
           value: action?.extraData?.value ? action?.extraData?.value : action.payload?.value,
-          page: action.payload?.getAttribute("page") ?? 0,
+          page: action.payload?.getAttribute("data-page") ?? 0,
            error: action.payload?.error ?? ""
           }
         };
@@ -62,9 +62,6 @@ export function useWizardForm(pages) {
     setHasErrors(false)
     let haserrors = false
     Object.values(formData).forEach(inputData =>{
-      console.log(inputData.value)
-      console.log(inputData.page)
-      console.log(currentPage)
       if (inputData.page == currentPage){
         if (inputData?.error !== ""){ 
           setHasErrors(true);

@@ -10,8 +10,6 @@ function FormModal(props) {
 
   const [show, setShow] = useState(false);
   const Wizard = useWizardForm(props.pages)
-  console.log(Wizard.formData)
-
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -31,7 +29,6 @@ function FormModal(props) {
 
   const getProjectData = function (data) {
     const simplifiedData = {};
-    console.log(data)
     Object.entries(data).forEach(([inputName, inputValue]) => {
       if ("value" in inputValue) {
         if (typeof inputValue.value === "object") {

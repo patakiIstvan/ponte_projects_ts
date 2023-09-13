@@ -11,17 +11,18 @@ import InputContainer1, { inputValidate1 } from '../../form/formPages/InputConta
 import InputContainer2 from '../../form/formPages/InputContainer2';
 import InputContainer3 from '../../form/formPages/InputContainer3';
 
+interface ProjectContainerProps {
+  search: string;
+}
 
+const ProjectContainer: React.FC<ProjectContainerProps> = (props) => {
 
-const ProjectContainer = (props) => {
-
-  const [projectData, setProjectData] = useState(null);
-
+  const [projectData, setProjectData] = useState<any>(null);
+  console.log(projectData);
   const getProjectCards = async () => {
     let projects = await getProjects();
     if (props.search) {
-      console.log(props.search)
-      projects = projects.filter(project => project.title.toLowerCase().includes(props.search.toLowerCase()))
+      projects = projects.filter((project: Record<string, any>) => project.title.toLowerCase().includes(props.search.toLowerCase()))
     }
     setProjectData(projects);
   }
@@ -30,12 +31,14 @@ const ProjectContainer = (props) => {
     getProjectCards()
   }, [props.search])
 
-  const onModalSubmit = function (data) {
-    let projects = localStorage.getItem("projects");
-    projects = JSON.parse(projects);
-    projects.push(data)
-    localStorage.setItem("projects", JSON.stringify(projects));
-    getProjectCards();
+  const onModalSubmit = function (data: Record<string, any>) {
+    let projects: string | null = localStorage.getItem("projects");
+    if (projects) {
+      const projectArray: any[] = JSON.parse(projects);
+      projectArray.push(data)
+      localStorage.setItem("projects", JSON.stringify(projectArray));
+      getProjectCards();
+    }
   }
 
   if (!projectData) {
@@ -52,7 +55,7 @@ const ProjectContainer = (props) => {
       <Container>
 
         <Row xs={1} md={3} className="g-4">
-          {projectData.map((project, idx) => (
+          {projectData.map((project: Record<string, any>, idx: number) => (
             <Col key={idx}>
               <ProjectCard
                 {...project}

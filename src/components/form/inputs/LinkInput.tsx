@@ -3,17 +3,29 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+interface LinkInputProps {
+  handleLinkChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  page?: number;
+  formData?: {
+    links?: {
+      value?: Record<string, string>;
+    };
+  };
+}
 
-const LinkInput = (props) => {
-  const [inputId, setInputId] = useState(0);
 
-  const inputRef = useRef(null)
+const LinkInput: React.FC<LinkInputProps> = (props) => {
+  const [inputId, setInputId] = useState<number>(0);
 
-  const newLink = function (inputRef) {
-    if (inputRef.current.value.length > 0) {
-      setInputId(prevId => prevId + 1);
-      inputRef.current.value = ""
-      inputRef.current.focus();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const newLink = function (inputRef: React.RefObject<HTMLInputElement>) {
+    if (inputRef.current) {
+      if (inputRef.current?.value.length > 0) {
+        setInputId(prevId => prevId + 1);
+        inputRef.current.value = ""
+        inputRef.current.focus();
+      }
     }
   }
 
@@ -25,12 +37,12 @@ const LinkInput = (props) => {
           <Form.Control
             type="text"
             name="links"
-            inputid={inputId}
+            data-inputid={inputId}
             placeholder="Projekthez kapcsolódó weboldal"
             onChange={props.handleLinkChange}
-            onFocus={props.handleLinkChange}
+            onFocus={(e: React.FocusEvent<HTMLInputElement>) => props.handleLinkChange(e)}
             ref={inputRef}
-            page={props.page ?? 0}
+            data-page={props.page ?? 0}
           />
           <Button onClick={() => { newLink(inputRef) }} variant="outline-secondary">Link beküldése</Button>
 
@@ -45,7 +57,7 @@ const LinkInput = (props) => {
                 type="text"
                 disabled
                 name="links"
-                inputid={linkId}
+                data-inputid={linkId}
                 value={link}
               />
             </InputGroup>
