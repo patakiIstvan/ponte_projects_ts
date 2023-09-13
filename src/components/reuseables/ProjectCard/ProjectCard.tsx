@@ -17,7 +17,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = (props) => {
 
-  const titleUrl = props.title.replace(" ", "-")
+  const titleUrl = props.title ? props.title.replace(" ", "-") : "Projekt címe";
 
   return (
     <Card>

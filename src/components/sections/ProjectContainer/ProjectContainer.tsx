@@ -51,7 +51,6 @@ const ProjectContainer: React.FC<ProjectContainerProps> = (props) => {
 
   return (
     <section className="projectSection">
-      <div className="msg">Sajnos nem sikerült teljesen befejeznem a beadandót, még hátra van a változók typeosítása.</div>
       <Container>
 
         <Row xs={1} md={3} className="g-4">
