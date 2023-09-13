@@ -1,9 +1,21 @@
-import React from 'react'
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import './projectCard.scss';
 
-const ProjectCard = (props) => {
+interface Member {
+  name: string;
+  role: string[];
+}
+
+interface ProjectCardProps {
+  title: string;
+  description?: string;
+  members?: Member[];
+  links?: string[];
+}
+
+const ProjectCard: React.FC<ProjectCardProps> = (props) => {
 
   const titleUrl = props.title.replace(" ", "-")
 
@@ -11,7 +23,7 @@ const ProjectCard = (props) => {
     <Card>
       <Card.Body>
         <div className="card-title-container">
-          <img className="lettered-avatar" src={"https://avatar.oxro.io/avatar.svg?name=" + titleUrl} />
+          <img className="lettered-avatar" src={"https://avatar.oxro.io/avatar.svg?name=" + titleUrl} alt="link icon" />
           <Card.Title>{props.title}</Card.Title>
         </div>
         <Card.Text>{props.description}</Card.Text>
@@ -34,4 +46,4 @@ const ProjectCard = (props) => {
   )
 }
 
-export default ProjectCard
+export default ProjectCard;
