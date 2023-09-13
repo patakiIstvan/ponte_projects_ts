@@ -3,8 +3,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-interface LinkInputProps {
-  handleLinkChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+type LinkInputProps = {
+  handleLinkChange?: (event: any) => void;
   page?: number;
   formData?: {
     links?: {
@@ -14,7 +14,7 @@ interface LinkInputProps {
 }
 
 
-const LinkInput: React.FC<LinkInputProps> = (props) => {
+const LinkInput = (props: LinkInputProps) => {
   const [inputId, setInputId] = useState<number>(0);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -39,8 +39,8 @@ const LinkInput: React.FC<LinkInputProps> = (props) => {
             name="links"
             data-inputid={inputId}
             placeholder="Projekthez kapcsolódó weboldal"
-            onChange={props.handleLinkChange}
-            onFocus={(e: React.FocusEvent<HTMLInputElement>) => props.handleLinkChange(e)}
+            onChange={(e: React.ChangeEvent) => { props.handleLinkChange && props.handleLinkChange(e) }}
+            onFocus={(e: React.FocusEvent) => { props.handleLinkChange && props.handleLinkChange(e) }}
             ref={inputRef}
             data-page={props.page ?? 0}
           />

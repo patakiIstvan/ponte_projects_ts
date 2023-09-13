@@ -65,7 +65,7 @@ const MemberInput: React.FC<MemberInputProps> = (props) => {
             data-inputid={inputId}
             placeholder="Feladatot megkapja"
             onChange={props.handleMemberChange}
-            onFocus={(e: React.FocusEvent<HTMLInputElement>) => props.handleMemberChange(e)}
+            onFocus={(e: React.FocusEvent<HTMLInputElement>) => props.handleMemberChange && props.handleMemberChange(e)}
             ref={inputRef}
           />
           <DropdownButton
