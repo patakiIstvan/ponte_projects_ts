@@ -9,7 +9,7 @@ interface Member {
 }
 
 interface ProjectCardProps {
-  title: string;
+  title?: string;
   description?: string;
   members?: Member[];
   links?: string[];
