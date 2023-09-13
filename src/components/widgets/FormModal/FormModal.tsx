@@ -6,7 +6,12 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import './formModal.scss'
 import { useWizardForm } from '../../../utils/hooks/useWizardForm';
 
-function FormModal(props) {
+type FormModalProps = {
+  pages: any[]; // You should replace 'any' with the appropriate type for your pages.
+  onModalSubmit: (data: any) => void; // You should replace 'any' with the appropriate type for your data.
+}
+
+function FormModal(props: FormModalProps) {
 
   const [show, setShow] = useState(false);
   const Wizard = useWizardForm(props.pages)
@@ -27,12 +32,12 @@ function FormModal(props) {
     });
   };
 
-  const getProjectData = function (data) {
-    const simplifiedData = {};
-    Object.entries(data).forEach(([inputName, inputValue]) => {
+  const getProjectData = function (data: Record<string, any>) {
+    const simplifiedData: Record<string, any> = {};
+    Object.entries(data).forEach(([inputName, inputValue]: [string, any]) => {
       if ("value" in inputValue) {
         if (typeof inputValue.value === "object") {
-          const list = [];
+          const list: any[] = [];
           Object.values(inputValue.value).forEach(v => {
             list.push(v);
           })
@@ -45,7 +50,7 @@ function FormModal(props) {
     return simplifiedData;
   }
 
-  const onSubmit = function (e) {
+  const onSubmit = function (e: React.FormEvent) {
     e.preventDefault();
     if (Wizard.currentPage < Wizard.numberOfPages - 1) {
       Wizard.toNextPage()
