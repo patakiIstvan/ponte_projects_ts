@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 interface LinkInputProps {
-  handleLinkChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleLinkChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   page?: number;
   formData?: {
     links?: {

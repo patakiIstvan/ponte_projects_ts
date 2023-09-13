@@ -6,36 +6,51 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { dummy_roles } from '../../../utils/dummdata';
 
+interface MemberInputProps {
+  handleMemberChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  formData?: {
+    members?: {
+      value?: Record<string, { name: string; role: string[] }>;
+    };
+  };
+  page?: number;
+}
 
-const MemberInput = (props) => {
+
+const MemberInput: React.FC<MemberInputProps> = (props) => {
   const [inputId, setInputId] = useState(0);
-  const [role, setRole] = useState([]);
-  const inputRef = useRef(null)
+  const [role, setRole] = useState<string[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  const newMember = function (inputRef) {
-    if (inputRef.current.value.length > 0) {
+  const newMember = function (inputRef: React.RefObject<HTMLInputElement>) {
+    if (inputRef.current && inputRef.current.value.length > 0) {
       if (role.length > 0) {
         setInputId(prevId => prevId + 1);
       }
     }
   }
 
-  const handleRole = function (e, clearRoles = false) {
+  const handleRole = function (e: React.MouseEvent<HTMLElement> | null, clearRoles = false): void {
     if (!clearRoles && e) {
-      setRole([e.target.getAttribute("value")]);
+      const value: string | null = e.currentTarget.getAttribute('value');
+      if (value) {
+        setRole([value]);
+      }
     } else {
       setRole([]);
     }
   }
 
   useEffect(() => {
-    inputRef.current.focus();
+    inputRef.current && inputRef.current.focus();
   }, [role])
 
   useEffect(() => {
-    inputRef.current.value = ""
-    inputRef.current.focus();
-    handleRole()
+    if (inputRef.current) {
+      inputRef.current.value = ""
+      inputRef.current.focus();
+      handleRole(null)
+    }
   }, [inputId])
 
   return (
@@ -47,10 +62,10 @@ const MemberInput = (props) => {
             type="text"
             name="members"
             role={role.length > 0 ? role[0] : ""}
-            inputid={inputId}
+            data-inputid={inputId}
             placeholder="Feladatot megkapja"
             onChange={props.handleMemberChange}
-            onFocus={props.handleMemberChange}
+            onFocus={(e: React.FocusEvent<HTMLInputElement>) => props.handleMemberChange(e)}
             ref={inputRef}
           />
           <DropdownButton
@@ -73,7 +88,7 @@ const MemberInput = (props) => {
                 type="text"
                 disabled
                 name="members"
-                inputid={memberId}
+                data-inputid={memberId}
                 value={`${member.name ? member.name : ''}${member.role.length > 0 ? " - " + member.role[0] : ""}`}
                 data-page={props.page ?? 0}
               />

@@ -1,7 +1,6 @@
-import React from 'react'
 import LinkInput from '../inputs/LinkInput.tsx';
 
-const InputContainer2 = (props) => {
+const InputContainer2 = (props: Record<string, any>) => {
   return (
     <>
       <LinkInput {...props} />
