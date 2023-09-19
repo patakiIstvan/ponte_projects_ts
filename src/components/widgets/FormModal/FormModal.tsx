@@ -19,8 +19,19 @@ function FormModal(props: FormModalProps) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  interface InputChildProps {
+    // Define the properties expected on each child element
+    // These properties are used in React.cloneElement
+    handleTextChange: Function;
+    handleLinkChange: Function;
+    formData: FormData;
+    error: boolean;
+    handleMemberChange: Function;
+    page: number;
+  }
+
   const renderChildren = () => {
-    return React.Children.map(Wizard.currentInputs.inputs, (child) => {
+    return Wizard.currentInputs?.inputs && React.Children.map(Wizard.currentInputs.inputs, (child: React.ReactElement<InputChildProps>) => {
       return React.cloneElement(child, {
         handleTextChange: Wizard.handleTextChange,
         handleLinkChange: Wizard.handleLinkChange,
