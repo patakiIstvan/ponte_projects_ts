@@ -1,28 +1,22 @@
-import React from 'react';
 import TextInput from '../../reuseables/inputFields/TextInput';
 
-interface InputContainer1Props {
-  formData?: Record<string, any> | null;
-}
+const InputContainer1= (props: Record<string, any>) => {
 
-const InputContainer1: React.FC<InputContainer1Props> = ({ formData }) => {
-
-  console.log(formData)
   return (
 
     <>
       <TextInput
+        {...props}
         name="title"
         label="Cím"
-        data={formData || {}}
         max={255}
         required={true}
       />
       <TextInput
+        {...props}
         name="description"
         type="textarea"
         label="Leírás"
-        data={formData || {}}
         max={500}
       />
     </>

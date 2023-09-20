@@ -29,7 +29,6 @@ function FormModal(props: FormModalProps) {
     handleMemberChange: Function;
     page: number;
   }
-
   const renderChildren = () => {
     return Wizard.currentInputs?.inputs && React.Children.map(Wizard.currentInputs.inputs, (child: React.ReactElement<InputChildProps>) => {
       return React.cloneElement(child, {

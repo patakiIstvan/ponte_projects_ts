@@ -18,7 +18,6 @@ interface ProjectContainerProps {
 const ProjectContainer: React.FC<ProjectContainerProps> = (props) => {
 
   const [projectData, setProjectData] = useState<any>(null);
-  console.log(projectData);
   const getProjectCards = async () => {
     let projects = await getProjects();
     if (props.search) {

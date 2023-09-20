@@ -11,7 +11,7 @@ interface TextInputProps {
   placeholder?: string;
   handleTextChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   page?: number;
-  data?: Record<string, any>;
+  formData?: Record<string, any>;
   error?: boolean;
 }
 
@@ -53,10 +53,10 @@ const TextInput: React.FC<TextInputProps> = (props) => {
         </Form.Control>
       </Form.Group >
       <div className="extra-input-fields">
-        {props?.data && props?.data[props.name!]?.error && props.error && <span className="input-additional-text red">
-          {props?.data[props.name!]?.error}
+        {props?.formData && props?.formData[props.name!]?.error && props.error && <span className="input-additional-text red">
+          {props?.formData[props.name!]?.error}
         </span>}
-        {props?.data && props?.max && <span className="right-side input-additional-text">Karakterek: {props.data[props.name!] ? props?.data[props.name!].value.length : 0}/{props.max}</span>}
+        {props?.formData && props?.max && <span className="right-side input-additional-text">Karakterek: {props.formData[props.name!] ? props?.formData[props.name!].value.length : 0}/{props.max}</span>}
       </div>
     </>
   )
