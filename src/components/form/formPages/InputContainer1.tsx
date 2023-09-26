@@ -1,6 +1,6 @@
 import TextInput from '../../reuseables/inputFields/TextInput';
 
-const InputContainer1= (props: Record<string, any>) => {
+const InputContainer1 = (props: Record<string, any>) => {
 
   return (
 

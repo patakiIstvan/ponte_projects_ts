@@ -23,11 +23,16 @@ const LinkInput = (props: LinkInputProps) => {
     if (inputRef.current) {
       if (inputRef.current?.value.length > 0) {
         setInputId(prevId => prevId + 1);
-        inputRef.current.value = ""
-        inputRef.current.focus();
       }
     }
   }
+
+  React.useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.value = ""
+      inputRef.current.focus();
+    }
+  }, [inputId])
 
   return (
     <>

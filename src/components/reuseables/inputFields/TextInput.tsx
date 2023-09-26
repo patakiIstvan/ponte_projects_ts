@@ -38,6 +38,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
     extraProps["required"] = "required";
   }
 
+
   return (
     <>
       <Form.Group className="mb-3" controlId={props?.name ? props?.name : "name" + props?.label ? props?.label : "label"}>
@@ -46,7 +47,6 @@ const TextInput: React.FC<TextInputProps> = (props) => {
           {...extraProps}
           placeholder={props.placeholder}
           name={props.name ?? "textInput"}
-          autoFocus
           onChange={props?.handleTextChange}
           data-page={props.page ?? 0}
         >

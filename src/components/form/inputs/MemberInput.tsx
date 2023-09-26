@@ -8,13 +8,13 @@ import { dummy_roles } from '../../../utils/dummdata';
 
 interface MemberInputProps {
   handleMemberChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  formData?: {
-    members?: {
-      value?: Record<string, { name: string; role: string[] }>;
-    };
-  };
+  formData?: Record<string, any>
   page?: number;
+  error: string;
 }
+
+type memberType = { name: string, role: string[] }
+type memberListType = { [key: string]: memberType }
 
 
 const MemberInput: React.FC<MemberInputProps> = (props) => {
@@ -67,6 +67,7 @@ const MemberInput: React.FC<MemberInputProps> = (props) => {
             onChange={props.handleMemberChange}
             onFocus={(e: React.FocusEvent<HTMLInputElement>) => props.handleMemberChange && props.handleMemberChange(e)}
             ref={inputRef}
+            data-page={props.page ?? 0}
           />
           <DropdownButton
             variant="outline-secondary"
@@ -81,9 +82,9 @@ const MemberInput: React.FC<MemberInputProps> = (props) => {
           <Button onClick={() => { newMember(inputRef) }} variant="outline-secondary">Hozzáadás</Button>
 
         </InputGroup>
-        {props.formData?.members?.value && Object.entries(props.formData?.members?.value).map(([memberId, member]) => (
-          (<>
-            <InputGroup key={"member_" + member.name}>
+        {props.formData?.members?.value && Object.entries(props.formData?.members?.value as memberListType).map(([memberId, member]) => (
+          (<React.Fragment key={"member_" + memberId}>
+            <InputGroup >
               <Form.Control
                 type="text"
                 disabled
@@ -93,9 +94,14 @@ const MemberInput: React.FC<MemberInputProps> = (props) => {
                 data-page={props.page ?? 0}
               />
             </InputGroup>
-          </>)
+          </React.Fragment>)
         ))
         }
+        <div className="extra-input-fields normal-margin-top">
+          {props?.formData && props?.formData?.members?.error && props.error && <span className="input-additional-text red">
+            {props?.formData?.members?.error}
+          </span>}
+        </div>
       </div>
     </>
   )

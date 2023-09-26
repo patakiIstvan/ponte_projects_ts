@@ -38,13 +38,13 @@ export function useWizardForm(pages: Pages[]) {
           ...state,
           [action.payload.name]: {
             value: action?.extraData?.value ? action?.extraData?.value : action.payload?.value,
-            page: action.payload?.getAttribute("data-page") ?? 0,
+            page: Number(action.payload?.getAttribute("data-page")) ?? 0,
             error: action.payload?.error ?? ""
           }
         };
         if (currentInputs.validation) {
           try {
-            updatedFormData[action.payload.name].error = currentInputs.validation(action.payload?.name, action.payload?.value)
+            updatedFormData[action.payload.name].error = currentInputs.validation(action.payload?.name, action?.extraData?.value ? action?.extraData?.value : action.payload?.value)
           } catch (e) {
             console.log(e)
           }
@@ -58,13 +58,16 @@ export function useWizardForm(pages: Pages[]) {
   }
 
   const [formData, setFormData] = useReducer(initialReducer, {})
+  console.log(formData)
 
   function handleTextChange(e: any) {
     setFormData({ type: "ON_CHANGE", payload: e.target })
   }
 
   function handleLinkChange(e: any) {
-    setFormData({ type: "ON_CHANGE", payload: e.target, extraData: { value: { ...formData[e.target.name]?.value, [e.target.getAttribute("inputid")]: e.target.value } } })
+    if (e.target.value != "") {
+      setFormData({ type: "ON_CHANGE", payload: e.target, extraData: { value: { ...formData[e.target.name]?.value, [e.target.getAttribute("data-inputid")]: e.target.value } } })
+    }
   }
 
   function handleMemberChange(e: any) {
@@ -75,7 +78,7 @@ export function useWizardForm(pages: Pages[]) {
         extraData: {
           value: {
             ...formData[e.target.name]?.value,
-            [e.target.getAttribute("inputid")]: { name: e.target.value, role: e.target.getAttribute("role") != "" ? [e.target.getAttribute("role")] : [] }
+            [e.target.getAttribute("data-inputid")]: { name: e.target.value, role: e.target.getAttribute("role") != "" ? [e.target.getAttribute("role")] : [] }
           }
         }
       })
@@ -91,6 +94,7 @@ export function useWizardForm(pages: Pages[]) {
     let haserrors = false
     Object.values(formData).forEach((inputData: any) => {
       if (inputData.page == currentPage) {
+        console.log(inputData);
         if (inputData?.error !== "") {
           setHasErrors(true);
           haserrors = true;

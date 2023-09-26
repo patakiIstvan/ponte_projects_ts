@@ -8,7 +8,7 @@ import { getProjects } from '../../../utils/getprojects';
 import Spinner from 'react-bootstrap/Spinner';
 import FormModal from '../../widgets/FormModal/FormModal';
 import InputContainer1, { inputValidate1 } from '../../form/formPages/InputContainer1';
-import InputContainer2 from '../../form/formPages/InputContainer2';
+import InputContainer2, { inputValidate2 } from '../../form/formPages/InputContainer2';
 import InputContainer3 from '../../form/formPages/InputContainer3';
 
 interface ProjectContainerProps {
@@ -65,7 +65,7 @@ const ProjectContainer: React.FC<ProjectContainerProps> = (props) => {
           onModalSubmit={onModalSubmit}
           pages={[
             { inputs: <InputContainer1 />, "validation": inputValidate1, title: "Projekt leírások" },
-            { inputs: <InputContainer3 />, title: "Résztvevők hozzáadása" },
+            { inputs: <InputContainer3 />, "validation": inputValidate2, title: "Résztvevők hozzáadása" },
             { inputs: <InputContainer2 />, title: "Projekt linkek" }
 
           ]}
