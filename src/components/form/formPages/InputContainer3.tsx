@@ -10,14 +10,22 @@ const InputContainer3 = (props: Record<string, any>) => {
 }
 export default InputContainer3;
 
-export const inputValidate3 = function (inputName: string, inputValue: string) {
-  let errorMsg: string = ""
-  if (inputName == "members") {
-    Object.values(inputValue).forEach((member: any) => {
-      if (member.role.length == 0) {
-        errorMsg = "Adj pozíciót minden résztvevőnek"
+type memberType = { name: string, role: string[] }
+type inputType = Record<string, memberType>
+
+export const inputValidate3 = function (inputName: string, inputValue: inputType) {
+  console.log(inputValue)
+  let errorMessage = ""
+  if (inputName === "members") {
+    let isUnfinished = false;
+    Object.values(inputValue).forEach((member: memberType) => {
+      if (member.name === "" || member.role.length === 0) {
+        isUnfinished = true
       }
     })
+    if (isUnfinished) {
+      errorMessage = "Minden személynek nevet és pozíciót kell adni."
+    }
   }
-  return errorMsg;
-}
+  return errorMessage;
+};

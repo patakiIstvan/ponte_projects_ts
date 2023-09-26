@@ -10,7 +10,7 @@ interface MemberInputProps {
   handleMemberChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   formData?: Record<string, any>
   page?: number;
-  error: string;
+  error?: string;
 }
 
 type memberType = { name: string, role: string[] }
