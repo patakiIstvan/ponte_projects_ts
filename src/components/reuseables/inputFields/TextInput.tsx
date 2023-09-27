@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Form from 'react-bootstrap/Form';
 import './textInput.scss'
 
@@ -22,6 +22,17 @@ type typeOfInputType = {
 }
 
 const TextInput: React.FC<TextInputProps> = (props) => {
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    if (props?.formData && props.name && inputRef.current) {
+      const inputData = props.formData[props.name]; // Access value based on props.name
+      if (inputData !== undefined) {
+        inputRef.current.value = inputData.value;
+      }
+    }
+  }, [])
 
   let extraProps: Record<string, any> = {}
 
@@ -49,6 +60,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
           name={props.name ?? "textInput"}
           onChange={props?.handleTextChange}
           data-page={props.page ?? 0}
+          ref={inputRef}
         >
         </Form.Control>
       </Form.Group >
