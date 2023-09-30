@@ -11,6 +11,7 @@ const InputContainer1 = (props: Record<string, any>) => {
         label="Cím"
         max={255}
         required={true}
+        autofocus={true}
       />
       <TextInput
         {...props}

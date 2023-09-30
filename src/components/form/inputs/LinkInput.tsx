@@ -8,14 +8,14 @@ type LinkInputProps = {
   page?: number;
   formData?: {
     links?: {
-      value?: Record<string, string>;
+      value?: { [key: string]: string };
     };
   };
 }
 
 
 const LinkInput = (props: LinkInputProps) => {
-  const [inputId, setInputId] = useState<number>(0);
+  const [inputId, setInputId] = useState<number>(props?.formData?.links?.value && Object.keys(props?.formData?.links?.value).length !== 0 ? Math.max(...Object.keys(props?.formData?.links?.value).map(Number)) + 1 : 0);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 

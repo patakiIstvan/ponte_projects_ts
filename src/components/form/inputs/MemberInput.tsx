@@ -18,7 +18,8 @@ type memberListType = { [key: string]: memberType }
 
 
 const MemberInput: React.FC<MemberInputProps> = (props) => {
-  const [inputId, setInputId] = useState(0);
+
+  const [inputId, setInputId] = useState(props?.formData?.members?.value && Object.keys(props?.formData?.members?.value).length !== 0 ? Math.max(...Object.keys(props?.formData?.members?.value).map(Number)) + 1 : 0);
   const [role, setRole] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -52,10 +53,6 @@ const MemberInput: React.FC<MemberInputProps> = (props) => {
       handleRole(null)
     }
   }, [inputId])
-
-  useEffect(() => {
-    console.log(inputRef.current?.value ?? "")
-  }, [inputRef.current?.value])
 
 
   return (

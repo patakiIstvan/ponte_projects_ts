@@ -13,6 +13,7 @@ interface TextInputProps {
   page?: number;
   formData?: Record<string, any>;
   error?: boolean;
+  autofocus?: boolean;
 }
 
 type typeOfInputType = {
@@ -30,6 +31,11 @@ const TextInput: React.FC<TextInputProps> = (props) => {
       const inputData = props.formData[props.name]; // Access value based on props.name
       if (inputData !== undefined) {
         inputRef.current.value = inputData.value;
+      }
+    }
+    if (inputRef.current) {
+      if ("autofocus" in props) {
+        inputRef.current.focus();
       }
     }
   }, [])

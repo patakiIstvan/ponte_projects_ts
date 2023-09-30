@@ -60,7 +60,7 @@ export function useWizardForm(pages: Pages[]) {
   }
 
   const [formData, setFormData] = useReducer(initialReducer, {})
-  // console.log(formData)
+  console.log(formData)
 
   function handleInputItemDelete(inputName: string, index: number) {
     setFormData({ type: "DELETE_INPUT_ITEM", payload: { inputName: inputName, index: index } })
@@ -71,8 +71,9 @@ export function useWizardForm(pages: Pages[]) {
   }
 
   function handleLinkChange(e: any) {
-    if (e.target.value != "") {
-      setFormData({ type: "ON_CHANGE", payload: e.target, extraData: { value: { ...formData[e.target.name]?.value, [e.target.getAttribute("data-inputid")]: e.target.value } } })
+    setFormData({ type: "ON_CHANGE", payload: e.target, extraData: { value: { ...formData[e.target.name]?.value, [e.target.getAttribute("data-inputid")]: e.target.value } } })
+    if (e.target.value == "") {
+      handleInputItemDelete(e.target.name, e.target.getAttribute("data-inputid"))
     }
   }
 
