@@ -53,6 +53,11 @@ const MemberInput: React.FC<MemberInputProps> = (props) => {
     }
   }, [inputId])
 
+  useEffect(() => {
+    console.log(inputRef.current?.value ?? "")
+  }, [inputRef.current?.value])
+
+
   return (
     <>
       <div className="linkInput-container">
@@ -82,21 +87,19 @@ const MemberInput: React.FC<MemberInputProps> = (props) => {
           <Button onClick={() => { newMember(inputRef) }} variant="outline-secondary">Hozzáadás</Button>
 
         </InputGroup>
-        {props.formData?.members?.value && Object.entries(props.formData?.members?.value as memberListType).map(([memberId, member]) => (
-          (<React.Fragment key={"member_" + memberId}>
-            <InputGroup >
-              <Form.Control
-                type="text"
-                disabled
-                name="members"
-                data-inputid={memberId}
-                value={`${member.name ? member.name : ''}${member.role.length > 0 ? " - " + member.role[0] : ""}`}
-                data-page={props.page ?? 0}
-              />
-            </InputGroup>
+        {props.formData?.members?.value && Object.entries(props.formData?.members?.value as memberListType).map(([memberId, member], idx) => (
+          (<React.Fragment key={idx}>
+            <Form.Control
+              type="text"
+              disabled
+              name="members"
+              data-inputid={memberId}
+              value={`${member.name ? member.name : ''}${member.role.length > 0 ? " - " + member.role[0] : ""}`}
+              data-page={props.page ?? 0}
+            />
           </React.Fragment>)
-        ))
-        }
+        ))}
+
         <div className="extra-input-fields normal-margin-top">
           {props?.formData && props?.formData?.members?.error && props.error && <span className="input-additional-text red">
             {props?.formData?.members?.error}

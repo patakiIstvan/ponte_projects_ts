@@ -10,19 +10,11 @@ interface FormData {
   [key: string]: InputData;
 }
 
+
 interface Pages {
   validation?: (name: string, value: any) => string;
   inputs?: React.ReactElement;
   title?: string
-}
-
-interface WizardFormState {
-  currentPage: number;
-  hasErrors: boolean;
-  currentInputs: {
-    validation: (name: string, value: any) => string;
-  };
-  formData: FormData;
 }
 
 export function useWizardForm(pages: Pages[]) {
@@ -31,7 +23,7 @@ export function useWizardForm(pages: Pages[]) {
   const [hasErrors, setHasErrors] = useState(false);
   const currentInputs = pages[currentPage]
 
-  const initialReducer = function (state: WizardFormState, action: any) {
+  const initialReducer = function (state: FormData, action: any) {
     switch (action.type) {
       case "ON_CHANGE":
         let updatedFormData: Record<string, any> = {
@@ -46,19 +38,33 @@ export function useWizardForm(pages: Pages[]) {
           try {
             updatedFormData[action.payload.name].error = currentInputs.validation(action.payload?.name, action?.extraData?.value ? action?.extraData?.value : action.payload?.value)
           } catch (e) {
-            console.log(e)
+            console.log(e);
           }
         }
         return updatedFormData;
       case "ON_CLEAR":
         return action.payload;
+      case "DELETE_INPUT_ITEM":
+        if (action.payload.inputName && action.payload.index && action.payload.inputName in state) {
+          const inputName: string = action.payload.inputName;
+          const index: number = action.payload.index;
+          const inputData: InputData | undefined = state[inputName];
+          if (inputData && index in inputData.value) {
+            delete inputData.value[index];
+          }
+        }
+        return state;
       default:
         return state
     }
   }
 
   const [formData, setFormData] = useReducer(initialReducer, {})
-  console.log(formData)
+  // console.log(formData)
+
+  function handleInputItemDelete(inputName: string, index: number) {
+    setFormData({ type: "DELETE_INPUT_ITEM", payload: { inputName: inputName, index: index } })
+  }
 
   function handleTextChange(e: any) {
     setFormData({ type: "ON_CHANGE", payload: e.target })
@@ -71,17 +77,18 @@ export function useWizardForm(pages: Pages[]) {
   }
 
   function handleMemberChange(e: any) {
-    if (e.target.value != "") {
-      setFormData({
-        type: "ON_CHANGE",
-        payload: e.target,
-        extraData: {
-          value: {
-            ...formData[e.target.name]?.value,
-            [e.target.getAttribute("data-inputid")]: { name: e.target.value, role: e.target.getAttribute("role") != "" ? [e.target.getAttribute("role")] : [] }
-          }
+    setFormData({
+      type: "ON_CHANGE",
+      payload: e.target,
+      extraData: {
+        value: {
+          ...formData[e.target.name]?.value,
+          [e.target.getAttribute("data-inputid")]: { name: e.target.value, role: e.target.getAttribute("role") != "" ? [e.target.getAttribute("role")] : [] }
         }
-      })
+      }
+    })
+    if (e.target.value == "") {
+      handleInputItemDelete(e.target.name, e.target.getAttribute("data-inputid"))
     }
   }
 
@@ -94,7 +101,6 @@ export function useWizardForm(pages: Pages[]) {
     let haserrors = false
     Object.values(formData).forEach((inputData: any) => {
       if (inputData.page == currentPage) {
-        console.log(inputData);
         if (inputData?.error !== "") {
           setHasErrors(true);
           haserrors = true;

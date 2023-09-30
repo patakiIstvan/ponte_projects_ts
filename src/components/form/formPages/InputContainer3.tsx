@@ -14,7 +14,6 @@ type memberType = { name: string, role: string[] }
 type inputType = Record<string, memberType>
 
 export const inputValidate3 = function (inputName: string, inputValue: inputType) {
-  console.log(inputValue)
   let errorMessage = ""
   if (inputName === "members") {
     let isUnfinished = false;
