@@ -5,12 +5,16 @@ import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { dummy_roles } from '../../../utils/dummdata';
+import CloseButton from 'react-bootstrap/CloseButton';
+import './memberinput.scss';
+
 
 interface MemberInputProps {
   handleMemberChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   formData?: Record<string, any>
   page?: number;
   error?: string;
+  deleteItem?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 type memberType = { name: string, role: string[] }
@@ -86,14 +90,17 @@ const MemberInput: React.FC<MemberInputProps> = (props) => {
         </InputGroup>
         {props.formData?.members?.value && Object.entries(props.formData?.members?.value as memberListType).map(([memberId, member], idx) => (
           (<React.Fragment key={idx}>
-            <Form.Control
-              type="text"
-              disabled
-              name="members"
-              data-inputid={memberId}
-              value={`${member.name ? member.name : ''}${member.role.length > 0 ? " - " + member.role[0] : ""}`}
-              data-page={props.page ?? 0}
-            />
+            <div className="input-list-container">
+              <Form.Control
+                type="text"
+                disabled
+                name="members"
+                data-inputid={memberId}
+                value={`${member?.name ? member.name : ''}${member?.role?.length > 0 ? " - " + member.role[0] : ""}`}
+                data-page={props.page ?? 0}
+              />
+              <CloseButton onClick={props.deleteItem} name="members" data-inputid={memberId} className="input-close" />
+            </div>
           </React.Fragment>)
         ))}
 

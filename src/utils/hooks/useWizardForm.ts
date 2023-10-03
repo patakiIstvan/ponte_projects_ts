@@ -24,12 +24,34 @@ export function useWizardForm(pages: Pages[]) {
   const currentInputs = pages[currentPage]
 
   const initialReducer = function (state: FormData, action: any) {
+
+    let inputValue: any = "";
+    if (!action?.aboutToDelete) {
+      inputValue = action?.extraData?.value ? action?.extraData?.value : action.payload?.value
+    } else {
+      const name = action.payload.getAttribute("name") ?? null;
+      if (name && state[name] && state[name].value) {
+        if (typeof state[name].value === 'object' && state[name].value !== null && !Array.isArray(state[name].value)) {
+          inputValue = state[name].value;
+          let inputId = action.payload.getAttribute("data-inputid");
+          if (inputId) {
+            inputId = Number(inputId);
+            Object.keys(state[name].value).forEach(k => {
+              if (k == inputId) {
+                inputValue[k] = "";
+              }
+            })
+          }
+        }
+
+      }
+    }
     switch (action.type) {
       case "ON_CHANGE":
         let updatedFormData: Record<string, any> = {
           ...state,
           [action.payload.name]: {
-            value: action?.extraData?.value ? action?.extraData?.value : action.payload?.value,
+            value: inputValue,
             page: Number(action.payload?.getAttribute("data-page")) ?? 0,
             error: action.payload?.error ?? ""
           }
@@ -75,6 +97,11 @@ export function useWizardForm(pages: Pages[]) {
     if (e.target.value == "") {
       handleInputItemDelete(e.target.name, e.target.getAttribute("data-inputid"))
     }
+  }
+
+  function deleteItem(e: any) {
+    setFormData({ type: "ON_CHANGE", payload: e.target, aboutToDelete: true })
+    handleInputItemDelete(e.target.getAttribute("name"), e.target.getAttribute("data-inputid"))
   }
 
   function handleMemberChange(e: any) {
@@ -138,6 +165,7 @@ export function useWizardForm(pages: Pages[]) {
     formData,
     clearFormData,
     hasErrors,
-    handleMemberChange
+    handleMemberChange,
+    deleteItem
   }
 }

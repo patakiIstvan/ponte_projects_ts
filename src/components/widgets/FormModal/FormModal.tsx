@@ -24,11 +24,13 @@ function FormModal(props: FormModalProps) {
     // These properties are used in React.cloneElement
     handleTextChange: Function;
     handleLinkChange: Function;
+    deleteItem: Function;
     formData: FormData;
     error: boolean;
     handleMemberChange: Function;
     page: number;
   }
+
   const renderChildren = () => {
     return Wizard.currentInputs?.inputs && React.Children.map(Wizard.currentInputs.inputs, (child: React.ReactElement<InputChildProps>) => {
       return React.cloneElement(child, {
@@ -37,7 +39,8 @@ function FormModal(props: FormModalProps) {
         formData: Wizard.formData,
         error: Wizard.hasErrors,
         handleMemberChange: Wizard.handleMemberChange,
-        page: Wizard.currentPage
+        page: Wizard.currentPage,
+        deleteItem: Wizard.deleteItem
       });
     });
   };
