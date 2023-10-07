@@ -36,11 +36,7 @@ export function useWizardForm(pages: Pages[]) {
           let inputId = action.payload.getAttribute("data-inputid");
           if (inputId) {
             inputId = Number(inputId);
-            Object.keys(state[name].value).forEach(k => {
-              if (k == inputId) {
-                inputValue[k] = "";
-              }
-            })
+            inputValue[inputId] = "";
           }
         }
 

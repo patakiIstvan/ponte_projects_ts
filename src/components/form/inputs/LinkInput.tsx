@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import CloseButton from 'react-bootstrap/CloseButton';
 
 type LinkInputProps = {
   handleLinkChange?: (event: any) => void;
@@ -11,6 +12,7 @@ type LinkInputProps = {
       value?: { [key: string]: string };
     };
   };
+  deleteItem?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 
@@ -53,20 +55,23 @@ const LinkInput = (props: LinkInputProps) => {
 
         </InputGroup>
         {props.formData?.links?.value && Object.entries(props.formData?.links?.value).map(([linkId, link]) => (
-          (<>
-            <InputGroup key={"link_" + link}>
-              <InputGroup.Text>
-                <img className="link-icon" src={`https://www.google.com/s2/favicons?domain=${link}&sz=256`} />
-              </InputGroup.Text>
-              <Form.Control
-                type="text"
-                disabled
-                name="links"
-                data-inputid={linkId}
-                value={link}
-              />
-            </InputGroup>
-          </>)
+          (<React.Fragment key={"link_" + link}>
+            <div className="input-list-container">
+              <InputGroup>
+                <InputGroup.Text>
+                  <img className="link-icon" src={`https://www.google.com/s2/favicons?domain=${link}&sz=256`} />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  disabled
+                  name="links"
+                  data-inputid={linkId}
+                  value={link}
+                />
+              </InputGroup>
+              <CloseButton onClick={props.deleteItem} name="links" data-inputid={linkId} className="input-close" />
+            </div>
+          </React.Fragment>)
         ))
         }
       </div>
