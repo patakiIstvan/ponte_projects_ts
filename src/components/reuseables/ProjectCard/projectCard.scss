@@ -4,8 +4,15 @@
 }
 .card-title-container {
   display: flex;
-  align-items: baseline;
-gap: 10px;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+
+  .card-title-left{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
 }
 .link-container{
   display: flex;

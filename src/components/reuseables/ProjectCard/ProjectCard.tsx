@@ -2,6 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import './projectCard.scss';
+import CloseButton from 'react-bootstrap/CloseButton';
 
 interface Member {
   name: string;
@@ -13,6 +14,8 @@ interface ProjectCardProps {
   description?: string;
   members?: Member[];
   links?: string[];
+  projectId?: number;
+  deleteProject: Function;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = (props) => {
@@ -23,8 +26,11 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
     <Card>
       <Card.Body>
         <div className="card-title-container">
-          <img className="lettered-avatar" src={"https://avatar.oxro.io/avatar.svg?name=" + titleUrl} alt="link icon" />
-          <Card.Title>{props.title}</Card.Title>
+          <div className="card-title-left">
+            <img className="lettered-avatar" src={"https://avatar.oxro.io/avatar.svg?name=" + titleUrl} alt="link icon" />
+            <Card.Title>{props.title}</Card.Title>
+          </div>
+          <CloseButton onClick={props.deleteProject} data-projectid={props.projectId} />
         </div>
         <Card.Text>{props.description}</Card.Text>
       </Card.Body>

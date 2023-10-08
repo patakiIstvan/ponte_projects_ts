@@ -1,7 +1,7 @@
 export const dummy_roles = ["Project manager", "Sr. front-end", "Front-end", "Sr. Back-end", "Back-end", "Team leader", "HR", "CEO", "Scrum master", "Marketing"]
 
-export const initialProjects = [
-  {
+export const initialProjects = {
+ 0: {
     title: "Beadandó feladat átnézése",
     description: "Senior front-endes kolléga bevonása a beadandó feladat átnézésére.",
     members:
@@ -17,7 +17,7 @@ export const initialProjects = [
       ],
     links: ["https://github.com/patakiIstvan/ts_projects_dashboard", "https://patakiistvan.netlify.app/"]
   },
-  {
+  1: {
     title: "Pataki István felvétele",
     description: "Az interjúk után megbizonyosodva a jelölt szakértelméről, Pataki István felvétele a csapatba.",
     members:
@@ -37,7 +37,7 @@ export const initialProjects = [
       ],
     links: ["https://www.facebook.com/istvan.pataki.39/", "https://patakiistvan.netlify.app/"]
   },
-  {
+  2: {
     title: "Integráció",
     description: "Kódbázis bemutatása Pataki Istvánnak, amelynek mélyebb tanulmányozásával hatékonyan tud dolgozni.",
     members:
@@ -61,4 +61,4 @@ export const initialProjects = [
       ],
     links: ["https://patakiistvan.netlify.app/"]
   }
-]
+}

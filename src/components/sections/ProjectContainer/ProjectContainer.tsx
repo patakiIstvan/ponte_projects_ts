@@ -15,13 +15,15 @@ interface ProjectContainerProps {
   search: string;
 }
 
+type projectType = { [key: string]: any }
+
 const ProjectContainer: React.FC<ProjectContainerProps> = (props) => {
 
-  const [projectData, setProjectData] = useState<any>(null);
+  const [projectData, setProjectData] = useState<projectType | null>(null);
   const getProjectCards = async () => {
     let projects = await getProjects();
     if (props.search) {
-      projects = projects.filter((project: Record<string, any>) => project.title.toLowerCase().includes(props.search.toLowerCase()))
+      projects = Object.values(projects).filter((project: Record<string, any>) => project.title.toLowerCase().includes(props.search.toLowerCase()))
     }
     setProjectData(projects);
   }
@@ -40,6 +42,18 @@ const ProjectContainer: React.FC<ProjectContainerProps> = (props) => {
     }
   }
 
+  const deleteProject = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    if (projectData) {
+      const target = e.target as HTMLButtonElement;
+      const projectId = target.getAttribute("data-projectid");
+      const newProjectData = Object.assign({}, ...Object.keys(projectData)
+        .filter(key => key !== projectId)
+        .map(key => ({ [key]: projectData[key] })));
+      localStorage.setItem("projects", JSON.stringify(newProjectData));
+      getProjectCards();
+    }
+  }
+
   if (!projectData) {
     return (
       <section className="projectSection center">
@@ -53,14 +67,17 @@ const ProjectContainer: React.FC<ProjectContainerProps> = (props) => {
       <Container>
 
         <Row xs={1} md={3} className="g-4">
-          {projectData.map((project: Record<string, any>, idx: number) => (
+          {Object.entries(projectData as projectType).map(([idx, project]) => (
             <Col key={idx}>
               <ProjectCard
                 {...project}
+                projectId={idx}
+                deleteProject={deleteProject}
               />
             </Col>
           ))}
         </Row>
+
         <FormModal
           onModalSubmit={onModalSubmit}
           pages={[
