@@ -10,6 +10,7 @@ import FormModal from '../../widgets/FormModal/FormModal';
 import InputContainer1, { inputValidate1 } from '../../form/formPages/InputContainer1';
 import InputContainer3, { inputValidate3 } from '../../form/formPages/InputContainer3';
 import InputContainer2 from '../../form/formPages/InputContainer2';
+import Button from 'react-bootstrap/Button';
 
 interface ProjectContainerProps {
   search: string;
@@ -63,21 +64,24 @@ const ProjectContainer: React.FC<ProjectContainerProps> = (props) => {
   }
 
   return (
-    <section className="projectSection">
+    <section className={Object.keys(projectData).length > 0 ? "projectSection" : "projectSection flex-center"}>
       <Container>
+        {Object.keys(projectData).length > 0 ?
+          <Row xs={1} md={3} className="g-4">
+            {Object.entries(projectData as projectType).map(([idx, project]) => (
+              <Col key={idx}>
+                <ProjectCard
+                  {...project}
+                  projectId={idx}
+                  deleteProject={deleteProject}
+                />
+              </Col>
+            ))}
+          </Row> : <div className="empty-project-container">
+            <span>This emptiness drives me crazy</span>
+            <Button onClick={() => { localStorage.removeItem("projects"); getProjectCards(); }} variant="outline-danger">Revert to initial state</Button>
 
-        <Row xs={1} md={3} className="g-4">
-          {Object.entries(projectData as projectType).map(([idx, project]) => (
-            <Col key={idx}>
-              <ProjectCard
-                {...project}
-                projectId={idx}
-                deleteProject={deleteProject}
-              />
-            </Col>
-          ))}
-        </Row>
-
+          </div>}
         <FormModal
           onModalSubmit={onModalSubmit}
           pages={[
