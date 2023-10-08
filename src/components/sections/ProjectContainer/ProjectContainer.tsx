@@ -36,9 +36,10 @@ const ProjectContainer: React.FC<ProjectContainerProps> = (props) => {
   const onModalSubmit = function (data: Record<string, any>) {
     let projects: string | null = localStorage.getItem("projects");
     if (projects) {
-      const projectArray: any[] = JSON.parse(projects);
-      projectArray.push(data)
-      localStorage.setItem("projects", JSON.stringify(projectArray));
+      const projectObject: { [key: number]: any } = JSON.parse(projects);
+      const index = Object.keys(projectObject).length !== 0 ? Math.max(...Object.keys(projectObject).map(Number)) + 1 : 0
+      projectObject[index] = data;
+      localStorage.setItem("projects", JSON.stringify(projectObject));
       getProjectCards();
     }
   }
