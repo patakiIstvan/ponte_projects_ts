@@ -68,7 +68,7 @@ const ProjectContainer: React.FC<ProjectContainerProps> = (props) => {
     <section className={Object.keys(projectData).length > 0 ? "projectSection" : "projectSection flex-center"}>
       <Container>
         {Object.keys(projectData).length > 0 ?
-          <Row xs={1} md={3} className="g-4">
+          <Row sm={1} md={2} xl={3} className="g-4">
             {Object.entries(projectData as projectType).map(([idx, project]) => (
               <Col key={idx}>
                 <ProjectCard
