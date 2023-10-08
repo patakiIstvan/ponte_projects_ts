@@ -15,7 +15,7 @@ interface ProjectCardProps {
   members?: Member[];
   links?: string[];
   projectId?: number;
-  deleteProject: Function;
+  deleteProject: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = (props) => {
