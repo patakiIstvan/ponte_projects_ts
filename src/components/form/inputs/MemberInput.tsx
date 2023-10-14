@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { dummy_roles } from '../../../utils/dummdata';
+import { dummy_roles } from '../../../utils/dummydata';
 import CloseButton from 'react-bootstrap/CloseButton';
 import './memberinput.scss';
 
@@ -69,7 +69,7 @@ const MemberInput: React.FC<MemberInputProps> = (props) => {
             name="members"
             role={role.length > 0 ? role[0] : ""}
             data-inputid={inputId}
-            placeholder="Feladatot megkapja"
+            placeholder="Assignee"
             onChange={props.handleMemberChange}
             onFocus={(e: React.FocusEvent<HTMLInputElement>) => props.handleMemberChange && props.handleMemberChange(e)}
             ref={inputRef}
@@ -77,7 +77,7 @@ const MemberInput: React.FC<MemberInputProps> = (props) => {
           />
           <DropdownButton
             variant="outline-secondary"
-            title="Pozíciója"
+            title="Role"
             id="input-group-dropdown-2"
             align="end"
           >
@@ -85,7 +85,7 @@ const MemberInput: React.FC<MemberInputProps> = (props) => {
               <Dropdown.Item key={role} onClick={handleRole} value={role} href="#">{role}</Dropdown.Item>
             ))}
           </DropdownButton>
-          <Button onClick={() => { newMember(inputRef) }} variant="outline-secondary">Hozzáadás</Button>
+          <Button onClick={() => { newMember(inputRef) }} variant="outline-secondary">Add member</Button>
 
         </InputGroup>
         {props.formData?.members?.value && Object.entries(props.formData?.members?.value as memberListType).map(([memberId, member], idx) => (

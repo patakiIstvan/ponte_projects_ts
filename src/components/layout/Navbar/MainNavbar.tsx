@@ -13,17 +13,17 @@ const MainNavbar = forwardRef<HTMLInputElement, MainNavbarProps>(function MainNa
   return (
     <Navbar data-bs-theme="dark" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand>Type-safe projektek</Navbar.Brand>
+        <Navbar.Brand>Type-safe projects</Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <Form className="d-flex">
             <Form.Control
               ref={ref}
               type="search"
-              placeholder="Projekt cím"
+              placeholder="Project title"
               className="me-2"
               aria-label="Search"
             />
-            <Button onClick={() => props.handleClick(ref)} variant="outline-primary">Keresés</Button>
+            <Button onClick={() => props.handleClick(ref)} variant="outline-primary">Search</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

@@ -45,13 +45,13 @@ const LinkInput = (props: LinkInputProps) => {
             type="text"
             name="links"
             data-inputid={inputId}
-            placeholder="Projekthez kapcsolódó weboldal"
+            placeholder="Website related to the project"
             onChange={(e: React.ChangeEvent) => { props.handleLinkChange && props.handleLinkChange(e) }}
             onFocus={(e: React.FocusEvent) => { props.handleLinkChange && props.handleLinkChange(e) }}
             ref={inputRef}
             data-page={props.page ?? 0}
           />
-          <Button onClick={() => { newLink(inputRef) }} variant="outline-secondary">Link beküldése</Button>
+          <Button onClick={() => { newLink(inputRef) }} variant="outline-secondary">Add link</Button>
 
         </InputGroup>
         {props.formData?.links?.value && Object.entries(props.formData?.links?.value).map(([linkId, link]) => (

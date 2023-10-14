@@ -23,7 +23,7 @@ export const inputValidate3 = function (inputName: string, inputValue: inputType
       }
     })
     if (isUnfinished) {
-      errorMessage = "Minden személynek nevet és pozíciót kell adni."
+      errorMessage = "Every member must have a role!"
     }
   }
   return errorMessage;

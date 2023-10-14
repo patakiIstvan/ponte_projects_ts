@@ -74,7 +74,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
         {props?.formData && props?.formData[props.name!]?.error && props.error && <span className="input-additional-text red">
           {props?.formData[props.name!]?.error}
         </span>}
-        {props?.formData && props?.max && <span className="right-side input-additional-text">Karakterek: {props.formData[props.name!] ? props?.formData[props.name!].value.length : 0}/{props.max}</span>}
+        {props?.formData && props?.max && <span className="right-side input-additional-text">Characters: {props.formData[props.name!] ? props?.formData[props.name!].value.length : 0}/{props.max}</span>}
       </div>
     </>
   )

@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <Container>
-        <span><a href="https://patakiistvan.netlify.app" target='blank'>Pataki István</a></span>
+        <span><span className="arrow-left">&gt;&gt;</span><a href="https://patakiistvan.netlify.app" target='blank'> István Pataki </a><span className="arrow-right">&lt;&lt;</span></span>
       </Container>
     </footer>
   )

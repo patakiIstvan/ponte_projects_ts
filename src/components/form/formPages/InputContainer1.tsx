@@ -8,7 +8,7 @@ const InputContainer1 = (props: Record<string, any>) => {
       <TextInput
         {...props}
         name="title"
-        label="Cím"
+        label="Title"
         max={255}
         required={true}
         autofocus={true}
@@ -17,7 +17,7 @@ const InputContainer1 = (props: Record<string, any>) => {
         {...props}
         name="description"
         type="textarea"
-        label="Leírás"
+        label="Description"
         max={500}
       />
     </>
@@ -29,11 +29,11 @@ export default InputContainer1;
 export const inputValidate1 = function (inputName: string, inputValue: string) {
   if (inputName === "title") {
     if (inputValue.length > 255) {
-      return "A cím túl hosszú";
+      return "The title is too long";
     }
   } else if (inputName === "description") {
     if (inputValue.length > 0 && inputValue.length < 50 || inputValue.length > 500) {
-      return "Ha van leírás, legyen minimum 50 karakter";
+      return "Description must be at least 50 characers!";
     }
   }
   return "";

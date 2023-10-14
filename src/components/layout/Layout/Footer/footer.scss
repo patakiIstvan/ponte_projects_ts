@@ -13,4 +13,41 @@
     color: white;
     text-decoration: none;
   }
+  .arrow-left{
+    position: relative;
+    animation-duration: 3s;
+    animation-name: moveLeft;
+    animation-iteration-count: infinite;
+  }
+
+  .arrow-right{
+    position: relative;
+    animation-duration: 3s;
+    animation-name: movRight;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes moveLeft {
+    0% { left: -6px;
+        letter-spacing: 0px;
+      }
+    50% { left: 1px;
+      letter-spacing: -4px;
+    }
+    100% { left: -6px; 
+      letter-spacing: 0px;
+    }
+  }
+
+  @keyframes movRight {
+    0% { right: -6px;
+      letter-spacing: 0px;
+    }
+  50% { right: 1px;
+    letter-spacing: -4px;
+  }
+  100% { right: -6px; 
+    letter-spacing: 0px;
+  }
+  }
 }

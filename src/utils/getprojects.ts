@@ -1,4 +1,4 @@
-import { initialProjects } from "./dummdata";
+import { initialProjects } from "./dummydata";
 
 type ProjectType = () => Record<string, any>
 

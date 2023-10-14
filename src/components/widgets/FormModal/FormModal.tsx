@@ -79,11 +79,11 @@ function FormModal(props: FormModalProps) {
   return (
     <>
       <Button className="fixed-button" variant="primary" onClick={handleShow}>
-        Új projekt
+        New project
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{Wizard.currentInputs?.title ? Wizard.currentInputs?.title : "Űrlap"}</Modal.Title>
+          <Modal.Title>{Wizard.currentInputs?.title ? Wizard.currentInputs?.title : "Form"}</Modal.Title>
         </Modal.Header>
         <Form onSubmit={onSubmit}>
           <Modal.Body>
@@ -92,10 +92,10 @@ function FormModal(props: FormModalProps) {
           </Modal.Body>
           <Modal.Footer className="space-between">
             {Wizard.currentPage > 0 ? <Button onClick={Wizard.toPrevPage} variant="secondary">
-              Vissza
+              Back
             </Button> : null}
             <Button type="submit" className="right-side" variant="primary">
-              {Wizard.currentPage >= Wizard.numberOfPages - 1 ? "Befejezés" : "Tovább"}
+              {Wizard.currentPage >= Wizard.numberOfPages - 1 ? "Submit" : "Next"}
             </Button>
           </Modal.Footer>
         </Form>

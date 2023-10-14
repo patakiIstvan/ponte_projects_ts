@@ -86,9 +86,9 @@ const ProjectContainer: React.FC<ProjectContainerProps> = (props) => {
         <FormModal
           onModalSubmit={onModalSubmit}
           pages={[
-            { inputs: <InputContainer1 />, "validation": inputValidate1, title: "Projekt leírások" },
-            { inputs: <InputContainer3 />, "validation": inputValidate3, title: "Résztvevők hozzáadása" },
-            { inputs: <InputContainer2 />, title: "Projekt linkek" }
+            { inputs: <InputContainer1 />, "validation": inputValidate1, title: "Project details" },
+            { inputs: <InputContainer3 />, "validation": inputValidate3, title: "Add members" },
+            { inputs: <InputContainer2 />, title: "Project links" }
 
           ]}
         />
